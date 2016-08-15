@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+    version="2.4">
+
+    <display-name>Collaborative Intelligence Map</display-name>
+    <description>
+	Collaborative Intelligence Mapping and Relationship Visualisation Tool
+    </description>
+
+    <context-param>
+      <param-name>app_name</param-name>
+      <param-value>Collaborative Intelligence Map</param-value>
+      <description>The name of the application shown on the front end</description>
+    </context-param>
+
+
+ <!--CharsetFilter start--> 
+
+  <filter>
+    <filter-name>Charset Filter</filter-name>
+    <filter-class>cimap.servlets.CharsetFilter</filter-class>
+      <init-param>
+        <param-name>requestEncoding</param-name>
+        <param-value>UTF-8</param-value>
+      </init-param>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>Charset Filter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
+  <!--CharsetFilter end-->
+    <servlet>
+        <servlet-name>Login</servlet-name>
+        <servlet-class>cimap.servlets.Login</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>Search</servlet-name>
+        <servlet-class>cimap.servlets.Search</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>SearchPaths</servlet-name>
+        <servlet-class>cimap.servlets.SearchPaths</servlet-class>
+    </servlet>
+
+	<servlet>
+        <servlet-name>JSON</servlet-name>
+        <servlet-class>cimap.servlets.JSON</servlet-class>
+    </servlet>
+
+	<servlet>
+        <servlet-name>NodeDetails</servlet-name>
+        <servlet-class>cimap.servlets.NodeDetails</servlet-class>
+    </servlet>
+
+	<servlet>
+        <servlet-name>AddNodeDetail</servlet-name>
+        <servlet-class>cimap.servlets.AddNodeDetail</servlet-class>
+    </servlet>
+
+	<servlet>
+        <servlet-name>AddOrUpdate</servlet-name>
+        <servlet-class>cimap.servlets.AddOrUpdate</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>UpdateNode</servlet-name>
+        <servlet-class>cimap.servlets.UpdateNode</servlet-class>
+    </servlet>
+
+	<servlet>
+        <servlet-name>AddOrUpdateEdge</servlet-name>
+        <servlet-class>cimap.servlets.AddOrUpdateEdge</servlet-class>
+    </servlet>
+	
+	<servlet>
+        <servlet-name>Themes</servlet-name>
+        <servlet-class>cimap.servlets.Themes</servlet-class>
+    </servlet>
+	
+	<servlet>
+        <servlet-name>EdgeDetails</servlet-name>
+        <servlet-class>cimap.servlets.EdgeDetails</servlet-class>
+    </servlet>
+	
+	<servlet>
+        <servlet-name>AddOrUpdateUser</servlet-name>
+        <servlet-class>cimap.servlets.AddOrUpdateUser</servlet-class>
+    </servlet>
+
+	<servlet>
+        <servlet-name>ContactLists</servlet-name>
+        <servlet-class>cimap.servlets.ContactLists</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Login</servlet-name>
+        <url-pattern>/Login</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>Search</servlet-name>
+        <url-pattern>/Search</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>SearchPaths</servlet-name>
+        <url-pattern>/SearchPaths</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>JSON</servlet-name>
+        <url-pattern>/JSON</url-pattern>
+    </servlet-mapping>
+
+	<servlet-mapping>
+        <servlet-name>NodeDetails</servlet-name>
+        <url-pattern>/NodeDetails</url-pattern>
+    </servlet-mapping>
+
+	<servlet-mapping>
+        <servlet-name>AddNodeDetail</servlet-name>
+        <url-pattern>/AddNodeDetail</url-pattern>
+    </servlet-mapping>
+
+	<servlet-mapping>
+        <servlet-name>AddOrUpdate</servlet-name>
+        <url-pattern>/AddOrUpdate</url-pattern>
+    </servlet-mapping>
+
+	<servlet-mapping>
+        <servlet-name>UpdateNode</servlet-name>
+        <url-pattern>/UpdateNode</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>AddOrUpdateEdge</servlet-name>
+        <url-pattern>/AddOrUpdateEdge</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>Themes</servlet-name>
+        <url-pattern>/Themes</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>EdgeDetails</servlet-name>
+        <url-pattern>/EdgeDetails</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>AddOrUpdateUser</servlet-name>
+        <url-pattern>/AddOrUpdateUser</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>ContactLists</servlet-name>
+        <url-pattern>/ContactLists</url-pattern>
+    </servlet-mapping>
+</web-app>

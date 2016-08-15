@@ -1,0 +1,80 @@
+<%@page import="cimap.graph.*"%>
+<%@page import="cimap.graph.node.*"%>
+<%@page import="cimap.graph.edge.*"%>
+<%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
+<%
+response.setHeader("Cache-Control","no-store,no-cache"); 
+response.setHeader("Pragma","no-cache"); 
+response.setDateHeader ("Expires", -1); 
+
+if(session.getAttribute("username") == null || !(((User)(session.getAttribute("username"))).isLoggedIn())){
+	String url = "login.jsp";
+	response.sendRedirect(url);
+} else {
+%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title><%=getServletContext().getInitParameter("app_name")%></title>
+	<link type="text/css" rel="stylesheet" href="./css/infovis.css" />
+	<link type="text/css" rel="stylesheet" href="./css/cimap-rMasterGraph.css" />
+
+	<script type="text/javascript" src="./js/mootools-beta-1.2b2.js"></script>
+<!--[if IE]><script language="javascript" type="text/javascript" src="./js/excanvas.js"></script><![endif]-->
+	<script language="javascript" type="text/javascript" src="./js/RMasterGraph.js"></script>
+	<script language="javascript" type="text/javascript" src="./js/infovis.js"></script>
+	<script language="javascript" type="text/javascript" src="./js/cimap-rMasterGraph.js"></script>
+
+</head>
+<%
+if (((User)(session.getAttribute("username"))).getGraph().getSelected() == null){
+%>
+<body>
+<p>You must select a node first</p>
+</body>
+<%
+} else {
+	User user = (User)(session.getAttribute("username"));
+%>
+	<script language="javascript" type="text/javascript">
+		var json = <%= user.getGraph().getSelected().toJSON() %>
+	</script>
+<%
+%>
+<body onload="init();">
+
+<div id="header">
+	
+
+
+</div>
+<div id="left">
+	
+	<div class="small-title"><a href="cimap.jsp?tab=nodedetails"><font color="white"><%=getServletContext().getInitParameter("app_name")%></font></a></div>
+	<div id="details" class="toggler left-item">Connections</div>
+	<div class="element contained-item">
+		<div class="inner" id="inner-details">
+			No Connections Listed<br />
+			<a href="cimap.jsp?tab=nodedetails">Back</a><br />
+			<p></p>
+			<form method="post" action="Search">
+			
+			Search Query: <p /><input type="text" name="query"></input><br />
+			<input type="submit" name="submit" value="search">
+			</form>
+		</div>
+	</div>
+		
+</div>
+
+	
+<canvas id="infovis"></canvas>
+<div id="label_container"></div>
+
+</body>
+<%}%>
+</html>
+<%
+}
+%>
