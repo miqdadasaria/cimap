@@ -24,12 +24,12 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 				<form method="post" action="Search">
 				<input type="hidden" name="query" value="search">
 
-					<div class="form-group row">
+					<div class="form-group row col-xs-4">
 					    <label for="name">Name</label>				
 						<input type="text" name="name" id="name" class="form-control">
 					</div>
 
-					<div class="form-group row">
+					<div class="form-group row col-xs-4">
 					    <label for="background">Background</label>				
 						<input type="text" name="background" id="background" class="form-control">
 					</div>
@@ -60,17 +60,17 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 						</select>
 					</div>
 
-					<div class="form-group row">
+					<div class="form-group row col-xs-4">
 					    <label for="city">City</label>				
 						<input type="text" name="city" id="city" class="form-control">
 					</div>
 
-					<div class="form-group row">
+					<div class="form-group row col-xs-4">
 					    <label for="state">State</label>				
 						<input type="text" name="state" id="state" class="form-control">
 					</div>
 	
-					<div class="form-group row">
+					<div class="form-group row col-xs-4">
 					    <label for="country">Country</label>				
 						<input type="text" name="country" id="country" class="form-control">
 					</div>			

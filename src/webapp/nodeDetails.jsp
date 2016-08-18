@@ -302,7 +302,7 @@ if (user.getGraph().getSelected() == null){
 				<input type="hidden" name="otherNodeType" value="Publication" />
 				</form></p>
 				<%}%>
-			<h4>Coverage</h4>
+			<h5>Coverage</h5>
 				<div class="list-group">
 				<%
 					ArrayList<NewsArticle> newss = currentNode.getNews();

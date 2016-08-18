@@ -56,7 +56,6 @@ User user = (User)(session.getAttribute("username"));
 	<%
 	}
 	%>
-			<h3>Theme</h3>
 			<h4>Name</h4>
 			<p><%= theme.getName() %></p>
 			<h4>Description</h4>
@@ -134,22 +133,12 @@ User user = (User)(session.getAttribute("username"));
 				}	
 	%>
 			
-				<br />
-				<center>
-				<hr width="80%" />
-				<p></p>
-				<table>
-					<tr>
-					<td>
-						<form method="post" action="Themes">
-						<input type="submit" name="submit" value="Back to Themes Page"><br />
-						</form>
-					</td>
-					</tr>
-				</table>
-				</center>
+	<hr width="80%" />
 
-	</div>
+	<form method="post" action="Themes">
+		<button type="submit" class="btn btn-primary" value="Back to Themes Page">Back to Themes Page</button>
+	</form>
+</div>
 </div>
 <% } else {
 %>

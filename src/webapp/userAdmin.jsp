@@ -35,22 +35,26 @@ if(user.getType() >= User.ADMIN){
 }
 %>
 				<h3>User Admin</h3>
-				<table border="1" cellpadding="6">
+				<div class="table-responsive">
+				<table border="1" cellpadding="6" class="table table-striped">
+				<thead>
 					<tr>
-						<td><h4><font color="#555555">Name</font></h4></td>
-						<td><h4><font color="#555555">Country</font></h4></td>
-						<td><h4><font color="#555555">Email</font></h4></td>
-						<td><h4><font color="#555555">Orgname</font></h4></td>
-						<td><h4><font color="#555555">Username</font></h4></td>
-						<td><h4><font color="#555555">Password</font></h4></td>
-						<td><h4><font color="#555555">Type</font></h4></td>
-						<td><h4><font color="#555555">View Count</font></h4></td>
-						<td><h4><font color="#555555">Update Count</font></h4></td>
-						<td><h4><font color="#555555">Last Login</font></h4></td>
-						<td><h4><font color="#555555">Login Count</font></h4></td>
-						<td><h4><font color="#555555">Update User</font></h4></td>
-						<td><h4><font color="#555555">Delete User</font></h4></td>
+						<th>Name</th>
+						<th>Country</th>
+						<th>Email</th>
+						<th>Orgname</th>
+						<th>Username</th>
+						<th>Password</th>
+						<th>Type</th>
+						<th>View Count</th>
+						<th>Update Count</th>
+						<th>Last Login</th>
+						<th>Login Count</th>
+						<th>Update User</th>
+						<th>Delete User</th>
 					</tr>
+				</thead>
+				<tbody>
 <%
 				User current = null;
 				while(u.hasNext()){
@@ -91,8 +95,9 @@ if(user.getType() >= User.ADMIN){
 <%
 				}
 %>
+				</tbody>
 				</table>
-
+				</div>
 	</div>
 </div>
 <% }}%>
