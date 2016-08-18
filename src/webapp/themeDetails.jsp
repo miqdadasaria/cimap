@@ -71,6 +71,7 @@ User user = (User)(session.getAttribute("username"));
 			</p>
 			<h4>Matching Nodes</h4>
 			<h5>Organisations</h5>
+			<div class="list-group">
 	<%
 				Iterator<Node> i = orgMatches.iterator();
 				Node current;
@@ -82,12 +83,13 @@ User user = (User)(session.getAttribute("username"));
 		        while(i.hasNext()){
 					current = i.next();
 	%>
-					<a href="NodeDetails?nodeId=<%= current.getId() %>"><%= current.getName() %></a><br />
+					<a href="NodeDetails?nodeId=<%= current.getId() %>" class="list-group-item"><%= current.getName() %></a><br />
 	<%
 				}	
 	%>
-
+			</div>
 			<h5>Individuals</h5>
+			<div class="list-group">
 	<%
 				Iterator<Node> j = indMatches.iterator();
 		        if(!j.hasNext()){
@@ -98,11 +100,13 @@ User user = (User)(session.getAttribute("username"));
 		        while(j.hasNext()){
 					current = j.next();
 	%>
-					<a href="NodeDetails?nodeId=<%= current.getId() %>"><%= current.getName() %></a><br />
+					<a href="NodeDetails?nodeId=<%= current.getId() %>" class="list-group-item"><%= current.getName() %></a><br />
 	<%
 				}	
 	%>
+			</div>
 			<h5>Events</h5>
+			<div class="list-group">
 	<%
 				Iterator<Node> k = eveMatches.iterator();
 		        if(!k.hasNext()){
@@ -113,11 +117,13 @@ User user = (User)(session.getAttribute("username"));
 		        while(k.hasNext()){
 					current = k.next();
 	%>
-					<a href="NodeDetails?nodeId=<%= current.getId() %>"><%= current.getName() %></a><br />
+					<a href="NodeDetails?nodeId=<%= current.getId() %>" class="list-group-item"><%= current.getName() %></a><br />
 	<%
 				}	
 	%>
+			</div>
 			<h5>Publications</h5>
+			<div class="list-group">
 	<%
 				Iterator<Node> l = pubMatches.iterator();
 		        if(!l.hasNext()){
@@ -128,11 +134,11 @@ User user = (User)(session.getAttribute("username"));
 		        while(l.hasNext()){
 					current = l.next();
 	%>
-					<a href="NodeDetails?nodeId=<%= current.getId() %>"><%= current.getName() %></a><br />
+					<a href="NodeDetails?nodeId=<%= current.getId() %>" class="list-group-item"><%= current.getName() %></a><br />
 	<%
 				}	
 	%>
-			
+			</div>
 	<hr width="80%" />
 
 	<form method="post" action="Themes">

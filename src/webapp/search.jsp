@@ -20,7 +20,6 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 	      </div>
 	      <div class="panel-body">
 
-			<div class="container">
 				<form method="post" action="Search">
 				<input type="hidden" name="query" value="search">
 
@@ -28,12 +27,12 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 					    <label for="name">Name</label>				
 						<input type="text" name="name" id="name" class="form-control">
 					</div>
-
+					<br>
 					<div class="form-group row col-xs-4">
 					    <label for="background">Background</label>				
 						<input type="text" name="background" id="background" class="form-control">
 					</div>
-
+					<br>
 					<div class="form-group row">
 					    <label for="type">Node Type</label>				
 						<select name="type" class="selectpicker" data-live-search="true" data-width="fit" id="type">
@@ -44,8 +43,7 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 							<option value="Publication">Publication</option>
 						</select>
 					</div>
-
-					
+					<br>
 					<div class="form-group row">
 					    <label for="theme">Themes</label>
 					    <select name="theme" class="selectpicker" data-live-search="true" data-width="fit" id="theme" multiple>   		<%
@@ -59,25 +57,25 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 						<%  }%>
 						</select>
 					</div>
-
+					<br>
 					<div class="form-group row col-xs-4">
 					    <label for="city">City</label>				
 						<input type="text" name="city" id="city" class="form-control">
 					</div>
-
+					<br>
 					<div class="form-group row col-xs-4">
 					    <label for="state">State</label>				
 						<input type="text" name="state" id="state" class="form-control">
 					</div>
-	
+					<br>
 					<div class="form-group row col-xs-4">
 					    <label for="country">Country</label>				
 						<input type="text" name="country" id="country" class="form-control">
 					</div>			
-
+					<br>
 					<button type="submit" class="btn btn-primary" value="search">Search</button>
 				</form>
-			</div>
+
 		</div>
 	</div>
 <%}%>

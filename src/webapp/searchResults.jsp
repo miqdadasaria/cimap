@@ -27,6 +27,7 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 	if(type.equals("All") || type.equals("Organisation")){	
 	%>
 			<h4>Organisations</h4>
+			<div class="list-group">
 	<%
 				ArrayList<Node> orgResults = (ArrayList<Node>)session.getAttribute("orgSearchResults");
 				Iterator<Node> i = orgResults.iterator();
@@ -38,15 +39,17 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 		        while(i.hasNext()){
 					current = i.next();
 	%>
-					<a href="NodeDetails?nodeId=<%=current.getId() %>"><%=current.getName() %></a><br />
+					<a href="NodeDetails?nodeId=<%=current.getId() %>" class="list-group-item"><%=current.getName() %></a><br />
 	<%
 				}	
 	%>
+			</div>
 	<%
 	}
 	if(type.equals("All") || type.equals("Individual")){	
 	%>
 			<h4>Individuals</h4>
+			<div class="list-group">
 	<%
 				ArrayList<Node> indResults = (ArrayList<Node>)session.getAttribute("indSearchResults");
 				Iterator<Node> j = indResults.iterator();
@@ -58,15 +61,17 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 		        while(j.hasNext()){
 					current = j.next();
 	%>
-					<a href="NodeDetails?nodeId=<%=current.getId() %>"><%=current.getName() %></a><br />
+					<a href="NodeDetails?nodeId=<%=current.getId() %>" class="list-group-item"><%=current.getName() %></a><br />
 	<%
 				}	
 	%>
+			</div>
 	<%
 	}
 	if(type.equals("All") || type.equals("Event")){	
 	%>
 			<h4>Events</h4>
+			<div class="list-group">
 	<%
 				ArrayList<Node> eveResults = (ArrayList<Node>)session.getAttribute("eveSearchResults");
 				Iterator<Node> k = eveResults.iterator();
@@ -78,15 +83,17 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 		        while(k.hasNext()){
 					current = k.next();
 	%>
-					<a href="NodeDetails?nodeId=<%=current.getId() %>"><%=current.getName() %></a><br />
+					<a href="NodeDetails?nodeId=<%=current.getId() %>" class="list-group-item"><%=current.getName() %></a><br />
 	<%
 				}	
 	%>
+			</div>
 	<%
 	}
 	if(type.equals("All") || type.equals("Publication")){	
 	%>
 			<h4>Publications</h4>
+			<div class="list-group">
 	<%
 				ArrayList<Node> pubResults = (ArrayList<Node>)session.getAttribute("pubSearchResults");
 				Iterator<Node> l = pubResults.iterator();
@@ -98,14 +105,14 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 		        while(l.hasNext()){
 					current = l.next();
 	%>
-					<a href="NodeDetails?nodeId=<%=current.getId() %>"><%=current.getName() %></a><br />
+					<a href="NodeDetails?nodeId=<%=current.getId() %>" class="list-group-item"><%=current.getName() %></a><br />
 	<%
 				}	
 	%>
 	<%
 	}
 	%>
-				
+			</div>	
 	<hr width="80%" />
 	<form method="post" action="Search">
 		<button type="submit" class="btn btn-primary" value="Back to Search Page">Back to Search Page</button>

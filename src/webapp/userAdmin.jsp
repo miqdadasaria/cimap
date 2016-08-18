@@ -34,7 +34,6 @@ if(user.getType() >= User.ADMIN){
 <%
 }
 %>
-				<h3>User Admin</h3>
 				<div class="table-responsive">
 				<table border="1" cellpadding="6" class="table table-striped">
 				<thead>
