@@ -17,51 +17,54 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 	nodes = MasterGraph.getAllNodes();
 %>
 
-	   <div class="panel panel-default">
-	      <div class="panel-heading">
+	<div class="panel panel-default">
+	    <div class="panel-heading">
 	        <h3 class="panel-title">Search for Paths</h3>
-	      </div>
-	      <div class="panel-body">
+	    </div>
+	    <div class="panel-body">
 
-			<form method="post" action="SearchPaths">
-			<input type="hidden" name="pathQuery" value="search">
-			<h3>Search for Paths</h3>
-			<h4>Start Node</h4>
-				<select name="startNode">
-				<%
-					Iterator<Node> i = nodes.iterator();
-					Node current;
-					while(i.hasNext()){
-						current = i.next();
-						%><option value="<%= current.getId()%>"><%= current.getName()%></option>	
-				<%	}%>
-				</select><br />
-			<h4>End Node</h4>
-				<select name="endNode">
-				<%
-					Iterator<Node> j = nodes.iterator();
-					while(j.hasNext()){
-						current = j.next();
-						%><option value="<%= current.getId()%>"><%= current.getName()%></option>	
-				<%	}%>
-				</select><br />
-			<h4>Max Path Length<h4>
-				<select name="maxLength">
-					<% for(int k = 1; k<11; k++){%>
-					<option value="<%=k%>" <% if(k==5){%>selected<%}%>><%=k%></option>
-					<%}%>
-				</select>
-			<center>
-			<table>
-				<tr>
-					<td>
-					<input type="submit" name="submit" value="search">
-					</td>
-				</tr>
-			</table>
-			</center>
-			</form>
-		</div>
+	      	<div class="container">
+				<form method="post" action="SearchPaths">
+					<input type="hidden" name="pathQuery" value="search">
+					
+					<div class="form-group">
+					    <label for="startNode">Start Node</label>
+					    <select class="form-control" id="startNode" name="startNode">
+						<%
+						Iterator<Node> i = nodes.iterator();
+						Node current;
+						while(i.hasNext()){
+							current = i.next();
+							%><option value="<%= current.getId()%>"><%= current.getName()%></option>	
+						<%	}%>
+						</select>
+  					</div>
+
+					<div class="form-group">
+					    <label for="endNode">End Node</label>
+					    <select class="form-control" id="endNode" name="endNode">
+						<%
+						Iterator<Node> j = nodes.iterator();
+						while(j.hasNext()){
+							current = j.next();
+							%><option value="<%= current.getId()%>"><%= current.getName()%></option>	
+						<%	}%>
+						</select>
+					</div>
+
+
+					<div class="form-group">
+					    <label for="maxLength">Maximum path length</label>
+					    <select class="form-control" id="maxLength" name="maxLength">
+						<% for(int k = 1; k<11; k++){%>
+						<option value="<%=k%>" <% if(k==5){%>selected<%}%>><%=k%></option>
+						<%}%>
+						</select>
+					</div>
+
+					<button type="submit" class="btn btn-primary" value="search">Search</button>
+				</form>
+			</div>
 		</div>
 
 <%}%>
