@@ -21,9 +21,8 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
   <div class="panel-heading">
     <h3 class="panel-title">Search Path Results</h3>
   </div>
-  <div class="panel-body">
+  <div class="panel-body container">
 
-  			<div class="container">
   				<div class="well">
 					<h4><%= paths.size()%> paths found between <a href="NodeDetails?nodeId=<%=query.getStartNode().getId() %>"><%= query.getStartNode().getName()%></a> and <a href="NodeDetails?nodeId=<%=query.getEndNode().getId() %>"><%= query.getEndNode().getName()%></a> of length less than or equal to <%= query.getMaxLength()%></h4>
 					<%
@@ -55,7 +54,6 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 			<form method="post" action="SearchPaths">
 				<button type="submit" name="submit" class="btn btn-primary">Back to Search Page</button>
 			</form>
-		</div>
 	</div>
 </div>
 

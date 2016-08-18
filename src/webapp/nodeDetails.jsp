@@ -72,7 +72,6 @@ if (user.getGraph().getSelected() == null){
 				</tr>
 			</table>
 			</p>
-			<h3>Node Details</h3>
 			<%if(currentNode.getPhotograph() != null){%>
 				<img src="<%= currentNode.getPhotograph() %>" border="0">
 			<%}%>
