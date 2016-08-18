@@ -54,21 +54,18 @@ if(session.getAttribute("username") != null && (((User)(session.getAttribute("us
 	      </div>
 	      <div class="panel-body">
 			<form method="post" action="Login">
-				<h3>Login</h3>
-				<h4>Username</h4>
-				<input type="text" name="username">
-				<h4>Password</h4>
-				<input type="password" name="password">
-				<center>
-				<p></p>
-				<table>
-					<tr>
-					<td>
-						<input type="submit" name="Login" value="Login">
-					</td>
-					</tr>
-				</table>
-				</center>
+				
+				<div class="form-group">
+					 <label for="username">Username</label>				
+						<input type="text" name="username" id="username" class="form-control">
+				</div>
+
+				<div class="form-group">
+					 <label for="password">Password</label>				
+						<input type="password" name="password" id="password" class="form-control">
+				</div>
+
+					<button type="submit" class="btn btn-primary" value="Login">Login</button>
 			</form>
 	      </div>
 	    </div>

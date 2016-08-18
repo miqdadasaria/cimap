@@ -21,7 +21,7 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 	    <div class="panel-heading">
 	        <h3 class="panel-title">Search for Paths</h3>
 	    </div>
-	    <div class="panel-body container">
+	    <div class="panel-body">
 				<form method="post" action="SearchPaths">
 					<input type="hidden" name="pathQuery" value="search">
 
@@ -64,5 +64,4 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 				</form>
 			</div>
 		</div>
-	</div>
 <%}%>
