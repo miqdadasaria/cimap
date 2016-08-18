@@ -20,50 +20,64 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 	      </div>
 	      <div class="panel-body">
 
-			<form method="post" action="Search">
-			<input type="hidden" name="query" value="search">
-			<h3>Search</h3>
-			<h4>Name</h4>
-			<input type="text" name="name">
-			<h4>Background</h4>
-			<input type="text" name="background">
-			<h4>Node Type</h4>
-			<select name="type">
-				<option value="All">All</option>
-				<option value="Organisation">Organisation</option>
-				<option value="Individual">Individual</option>
-				<option value="Event">Event</option>
-				<option value="Publication">Publication</option>
-			</select>
-			<h4>Themes</h4>
-			Restrict results to only those matched in selected themes (leave all unchecked for unrestricted search)<br />
-			<%
-				ArrayList<Theme> themes = MasterGraph.getThemeList();
-				Iterator<Theme> t = themes.iterator();
-				Theme theme;
-				while(t.hasNext()){
-					theme = t.next();
-			%>			
-				<%= theme.getName() %> <input type="checkbox" name="themes" value="<%= theme.getId()%>"><br />
-			<%  }%>
-			<h4>Contact Details</h4>
-			<h5>City</h5>
-			<input type="text" name="city"><br />
-			<h5>State</h5>
-			<input type="text" name="state"><br />
-			<h5>Country</h5>
-			<input type="text" name="country"><br />
-			<p></p>
-			<center>
-			<table>
-				<tr>
-					<td>
-					<input type="submit" name="submit" value="search">
-					</td>
-				</tr>
-			</table>
-			</center>
-			</form>
+			<div class="container">
+				<form method="post" action="Search">
+				<input type="hidden" name="query" value="search">
+
+					<div class="form-group row">
+					    <label for="name">Name</label>				
+						<input type="text" name="name" id="name" class="form-control">
+					</div>
+
+					<div class="form-group row">
+					    <label for="background">Background</label>				
+						<input type="text" name="background" id="background" class="form-control">
+					</div>
+
+					<div class="form-group row">
+					    <label for="type">Node Type</label>				
+						<select name="type" class="selectpicker" data-live-search="true" data-width="fit" id="type">
+							<option value="All">All</option>
+							<option value="Organisation">Organisation</option>
+							<option value="Individual">Individual</option>
+							<option value="Event">Event</option>
+							<option value="Publication">Publication</option>
+						</select>
+					</div>
+
+					
+					<div class="form-group row">
+					    <label for="theme">Themes</label>
+					    <select name="theme" class="selectpicker" data-live-search="true" data-width="fit" id="theme" multiple>   		<%
+						ArrayList<Theme> themes = MasterGraph.getThemeList();
+						Iterator<Theme> t = themes.iterator();
+						Theme theme;
+						while(t.hasNext()){
+							theme = t.next();
+						%>			
+						<option value="<%= theme.getId()%>"><%= theme.getName() %></option>
+						<%  }%>
+						</select>
+					</div>
+
+					<div class="form-group row">
+					    <label for="city">City</label>				
+						<input type="text" name="city" id="city" class="form-control">
+					</div>
+
+					<div class="form-group row">
+					    <label for="state">State</label>				
+						<input type="text" name="state" id="state" class="form-control">
+					</div>
+	
+					<div class="form-group row">
+					    <label for="country">Country</label>				
+						<input type="text" name="country" id="country" class="form-control">
+					</div>			
+
+					<button type="submit" class="btn btn-primary" value="search">Search</button>
+				</form>
+			</div>
 		</div>
 	</div>
 <%}%>

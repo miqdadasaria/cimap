@@ -151,6 +151,7 @@ if (user.getGraph().getSelected() == null){
 			</div>
 			<% } %>
 			<h4>Themes</h4>
+			<div class="list-group">
 			<% 
 				ArrayList<Theme> themes = currentNode.getThemes();
 				if (themes != null) {
@@ -158,11 +159,16 @@ if (user.getGraph().getSelected() == null){
 				while(i.hasNext()){
 					Theme a = i.next();
 			%>
-				<a href="Themes?themeid=<%= a.getId() %>"><%= a.getName() %></a>&nbsp;
+				<a href="Themes?themeid=<%= a.getId() %>" class="list-group-item"><%= a.getName() %></a>
 			<%	}}%>
+			</div>
 			<% if(isAdmin){%>
 			<p></p>
-			<form method="post" action="AddNodeDetail"><input type="submit" name="submit" value="Add or Remove Themes" /><input type="hidden" name="detail" value="theme" /><input type="hidden" name="nodeId" value="<%= currentNode.getId()%>" /></form>
+			<form method="post" action="AddNodeDetail">
+			<button type="submit" class="btn btn-primary" value="Add or Remove Themes">Add or Remove Themes</button>
+			<input type="hidden" name="detail" value="theme" />
+			<input type="hidden" name="nodeId" value="<%= currentNode.getId()%>" />
+			</form>
 			<%}%>
 			<% if(currentNode.getURL() != null){%>
 			<h4>URL</h4>
@@ -213,6 +219,7 @@ if (user.getGraph().getSelected() == null){
 			%>
 			<h4>Affiliations</h4>
 			<h5>Organisations</h5>
+				<div class="list-group">
 				<%
 					ArrayList<Edge> orgs = currentNode.getRelatedOrganisations();
 					Iterator<Edge> o = orgs.iterator();
@@ -222,12 +229,18 @@ if (user.getGraph().getSelected() == null){
 						currentEdge = o.next();
 						related = currentEdge.getOtherNode(currentNode);
 				%>
-					<a href="NodeDetails?nodeId=<%= related.getId() %>"><%= related.getName() %></a>&nbsp;<a href="EdgeDetails?update=edgeDetails&edgeId=<%= currentEdge.getId() %>">(<%= currentEdge.getType().getSubTypeName()%>)</a><br />
+					<a href="NodeDetails?nodeId=<%= related.getId() %>" class="list-group-item"><%= related.getName() %></a>&nbsp;<a href="EdgeDetails?update=edgeDetails&edgeId=<%= currentEdge.getId() %>">(<%= currentEdge.getType().getSubTypeName()%>)</a><br />
 				<%}%>
+				</div>
 				<% if(isAdmin){%>
-				<p><form method="post" action="AddOrUpdateEdge"><input type="submit" name="submit" value="Add Organisation" /><input type="hidden" name="update" value="addEdge" /><input type="hidden" name="otherNodeType" value="Organisation" /></form></p>
+				<p><form method="post" action="AddOrUpdateEdge">
+				<button type="submit" class="btn btn-primary" value="Add Organisation">Add Organisation</button>
+				<input type="hidden" name="update" value="addEdge" />
+				<input type="hidden" name="otherNodeType" value="Organisation" />
+				</form></p>
 				<%}%>
 			<h5>Individuals</h5>
+				<div class="list-group">
 				<%
 					ArrayList<Edge> inds = currentNode.getRelatedIndividuals();
 					Iterator<Edge> in = inds.iterator();
@@ -235,14 +248,20 @@ if (user.getGraph().getSelected() == null){
 						currentEdge = in.next();
 						related = currentEdge.getOtherNode(currentNode);
 				%>
-					<a href="NodeDetails?nodeId=<%= related.getId() %>"><%= related.getName() %></a>&nbsp;<a href="EdgeDetails?update=edgeDetails&edgeId=<%= currentEdge.getId() %>">(<%= currentEdge.getType().getSubTypeName()%>)</a><br />
+					<a href="NodeDetails?nodeId=<%= related.getId() %>" class="list-group-item"><%= related.getName() %></a>&nbsp;<a href="EdgeDetails?update=edgeDetails&edgeId=<%= currentEdge.getId() %>">(<%= currentEdge.getType().getSubTypeName()%>)</a><br />
 				<%
 					}
 				%>
+				</div>
 				<% if(isAdmin){%>
-				<p><form method="post" action="AddOrUpdateEdge"><input type="submit" name="submit" value="Add Individual" /><input type="hidden" name="update" value="addEdge" /><input type="hidden" name="otherNodeType" value="Individual" /></form></p>
+				<p><form method="post" action="AddOrUpdateEdge">
+				<button type="submit" class="btn btn-primary" value="Add Individual">Add Individual</button>
+				<input type="hidden" name="update" value="addEdge" />
+				<input type="hidden" name="otherNodeType" value="Individual" />
+				</form></p>
 				<%}%>
 			<h5>Events</h5>
+				<div class="list-group">
 				<%
 					ArrayList<Edge> events = currentNode.getRelatedEvents();
 					Iterator<Edge> event = events.iterator();
@@ -250,14 +269,20 @@ if (user.getGraph().getSelected() == null){
 						currentEdge = event.next(); 
 						related = currentEdge.getOtherNode(currentNode);
 				%>
-					<a href="NodeDetails?nodeId=<%= related.getId() %>"><%= related.getName() %></a>&nbsp;<a href="EdgeDetails?update=edgeDetails&edgeId=<%= currentEdge.getId() %>">(<%= currentEdge.getType().getSubTypeName()%>)</a><br />
+					<a href="NodeDetails?nodeId=<%= related.getId() %>" class="list-group-item"><%= related.getName() %></a>&nbsp;<a href="EdgeDetails?update=edgeDetails&edgeId=<%= currentEdge.getId() %>">(<%= currentEdge.getType().getSubTypeName()%>)</a><br />
 				<%
 					}
 				%>
+				</div>
 				<% if(isAdmin){ %>
-				<p><form method="post" action="AddOrUpdateEdge"><input type="submit" name="submit" value="Add Event" /><input type="hidden" name="update" value="addEdge" /><input type="hidden" name="otherNodeType" value="Event" /></form></p>
+				<p><form method="post" action="AddOrUpdateEdge">
+				<button type="submit" class="btn btn-primary" value="Add Event">Add Event</button>
+				<input type="hidden" name="update" value="addEdge" />
+				<input type="hidden" name="otherNodeType" value="Event" />
+				</form></p>
 				<%}%>
 			<h5>Publications</h5>
+				<div class="list-group">
 				<%
 					ArrayList<Edge> publications = currentNode.getRelatedPublications();
 					Iterator<Edge> pubs = publications.iterator();
@@ -265,14 +290,20 @@ if (user.getGraph().getSelected() == null){
 						currentEdge = pubs.next(); 
 						related = currentEdge.getOtherNode(currentNode);
 				%>
-					<a href="NodeDetails?nodeId=<%= related.getId() %>"><%= related.getName() %></a>&nbsp;<a href="EdgeDetails?update=edgeDetails&edgeId=<%= currentEdge.getId() %>">(<%= currentEdge.getType().getSubTypeName()%>)</a><br />
+					<a href="NodeDetails?nodeId=<%= related.getId() %>" class="list-group-item"><%= related.getName() %></a>&nbsp;<a href="EdgeDetails?update=edgeDetails&edgeId=<%= currentEdge.getId() %>">(<%= currentEdge.getType().getSubTypeName()%>)</a><br />
 				<%
 					}
 				%>
+				</div>
 				<% if(isAdmin){ %>
-				<p><form method="post" action="AddOrUpdateEdge"><input type="submit" name="submit" value="Add Publication" /><input type="hidden" name="update" value="addEdge" /><input type="hidden" name="otherNodeType" value="Publication" /></form></p>
+				<p><form method="post" action="AddOrUpdateEdge">
+				<button type="submit" class="btn btn-primary" value="Add Publication">Add Publication</button>
+				<input type="hidden" name="update" value="addEdge" />
+				<input type="hidden" name="otherNodeType" value="Publication" />
+				</form></p>
 				<%}%>
 			<h4>Coverage</h4>
+				<div class="list-group">
 				<%
 					ArrayList<NewsArticle> newss = currentNode.getNews();
 					Iterator<NewsArticle> n = newss.iterator();
@@ -280,12 +311,17 @@ if (user.getGraph().getSelected() == null){
 					while(n.hasNext()){
 						news = n.next();
 				%>
-					<a href="<%= news.getUrl() %>" target="_blank"><%= news.getTitle() %></a> <% if(news.getSource() !=null){ out.print("<i>"+news.getSource()+"</i>");} %> <% if(news.getDate() !=null){ out.print(fmt.format(news.getDate()));} %><br />
+					<a href="<%= news.getUrl() %>" target="_blank" class="list-group-item"><%= news.getTitle() %></a> <% if(news.getSource() !=null){ out.print("<i>"+news.getSource()+"</i>");} %> <% if(news.getDate() !=null){ out.print(fmt.format(news.getDate()));} %><br />
 				<%
 					}
 				%>
+				</div>
 				<% if(isAdmin){%>
-				<p><form method="post" action="AddNodeDetail"><input type="submit" name="submit" value="Add News" /><input type="hidden" name="detail" value="news" /><input type="hidden" name="nodeId" value="<%= currentNode.getId()%>" /></form></p>
+				<p><form method="post" action="AddNodeDetail">
+				<button type="submit" class="btn btn-primary" value="Add News">Add News</button>
+				<input type="hidden" name="detail" value="news" />
+				<input type="hidden" name="nodeId" value="<%= currentNode.getId()%>" />
+				</form></p>
 				<%}%>
 			<h4>Audit Info</h4>
 			<% if(currentNode.getAddedBy() != null){%>

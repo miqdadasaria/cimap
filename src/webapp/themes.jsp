@@ -20,17 +20,18 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 	        <h3 class="panel-title">Themes</h3>
 	      </div>
 	      <div class="panel-body">
-<%
-if(user.getType() >= User.ADMIN){
-%>
-			
+				<%
+				if(user.getType() >= User.ADMIN){
+				%>
 					<form method="post" action="Themes">
 					<input type="hidden" name="update" value="addTheme">
 					<p align="right"><button name="submit" value="submit" type="submit"><img src="images/new.png" alt="add new theme"></button></p>
 					</form>
-<%
-}
-%>
+				<%
+				}
+				%>
+
+			<div class="list-group">
 			<%
 				ArrayList<Theme> themes = MasterGraph.getThemeList();
 				Iterator<Theme> a = themes.iterator();
@@ -38,8 +39,10 @@ if(user.getType() >= User.ADMIN){
 				while(a.hasNext()){
 					theme = a.next();
 			%>			
-				<a href="Themes?update=themeDetails&themeid=<%= theme.getId() %>"><%= theme.getName() %></a><br />
+				<a href="Themes?update=themeDetails&themeid=<%= theme.getId() %>" class="list-group-item"><%= theme.getName() %></a><br />
 			<%  }%>
+			</div>
+
 			</div>
 		</div>
 <%}%>

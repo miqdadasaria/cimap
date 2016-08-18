@@ -23,48 +23,40 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
   </div>
   <div class="panel-body">
 
-
-				<h3><%= paths.size()%> paths found between <a href="NodeDetails?nodeId=<%=query.getStartNode().getId() %>"><%= query.getStartNode().getName()%></a> and <a href="NodeDetails?nodeId=<%=query.getEndNode().getId() %>"><%= query.getEndNode().getName()%></a> of length less than or equal to <%= query.getMaxLength()%></h3>
-<%
-			Iterator<Path> p = paths.iterator();
-	        Path path = null;
-			if(!p.hasNext()){
-%>
-			No paths found that fit your criteria.
-<%
-			}
-	        while(p.hasNext()){
-				path = p.next();
-				%><br /><p><%
-				Iterator<Node> nodes = path.getNodes().iterator(); 
-				Node node = nodes.next();
-				%>
-				<a href="NodeDetails?nodeId=<%=node.getId() %>"><%= node.getName()%></a>
-				<%
-				while(nodes.hasNext()){
-					node = nodes.next();
-					%>
-					> <a href="NodeDetails?nodeId=<%=node.getId() %>"><%= node.getName()%></a>
+  			<div class="container">
+  				<div class="well">
+					<h4><%= paths.size()%> paths found between <a href="NodeDetails?nodeId=<%=query.getStartNode().getId() %>"><%= query.getStartNode().getName()%></a> and <a href="NodeDetails?nodeId=<%=query.getEndNode().getId() %>"><%= query.getEndNode().getName()%></a> of length less than or equal to <%= query.getMaxLength()%></h4>
 					<%
-				}
-				%><p><%
-			}	
-%>
-			
-			<hr width="80%" />
-			<p></p>
-				<center>
-				<table>
-					<tr>
-						<td valign="top">
-							<form method="post" action="SearchPaths">
-							<input type="submit" name="submit" value="Back to Search Page"><br />
-							</form>
-						</td>
-					</tr>
-				</table>
-				</center>
-    </div>
+					Iterator<Path> p = paths.iterator();
+			        Path path = null;
+					if(!p.hasNext()){
+					%>
+					No paths found that fit your criteria.
+					<%
+					}
+			        while(p.hasNext()){
+						path = p.next();
+						%><br /><p><%
+						Iterator<Node> nodes = path.getNodes().iterator(); 
+						Node node = nodes.next();
+						%>
+						<a href="NodeDetails?nodeId=<%=node.getId() %>"><%= node.getName()%></a>
+						<%
+						while(nodes.hasNext()){
+							node = nodes.next();
+							%>
+							> <a href="NodeDetails?nodeId=<%=node.getId() %>"><%= node.getName()%></a>
+							<%
+						}
+						%><p><%
+					}	
+					%>
+				</div>			
+			<form method="post" action="SearchPaths">
+				<button type="submit" name="submit" class="btn btn-primary">Back to Search Page</button>
+			</form>
+		</div>
+	</div>
 </div>
 
 <%

@@ -106,19 +106,11 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 	}
 	%>
 				
-				<hr width="80%" />
-				<p></p>
-					<center>
-					<table>
-						<tr>
-							<td valign="top">
-								<form method="post" action="Search">
-								<input type="submit" name="submit" value="Back to Search Page"><br />
-								</form>
-							</td>
-						</tr>
-					</table>
-					</center>
+	<hr width="80%" />
+	<form method="post" action="Search">
+		<button type="submit" class="btn btn-primary" value="Back to Search Page">Back to Search Page</button>
+	</form>
+
 	</div>
 </div>
 
