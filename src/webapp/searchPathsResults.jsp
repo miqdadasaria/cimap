@@ -23,7 +23,7 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
   </div>
   <div class="panel-body container">
 
-  				<div class="well">
+  				<div class="well" width="80%">
 					<h4><%= paths.size()%> paths found between <a href="NodeDetails?nodeId=<%=query.getStartNode().getId() %>"><%= query.getStartNode().getName()%></a> and <a href="NodeDetails?nodeId=<%=query.getEndNode().getId() %>"><%= query.getEndNode().getName()%></a> of length less than or equal to <%= query.getMaxLength()%></h4>
 					<%
 					Iterator<Path> p = paths.iterator();

@@ -33,12 +33,6 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 	    <!-- Bootstrap core CSS -->
 	    <link href="./css/bootstrap.min.css" rel="stylesheet">
 	    <link href="./css/bootstrap-select.css" rel="stylesheet">
-	    <style type="text/css">
-	    	.panel-body .form-horizontal .form-group .well {
-			    margin-right: 25px;
-			    margin-left: 25px;
-			}
-	    </style>
 		<script language="javascript" type="text/javascript">
 			function confirmDeleteNode(nodeName){
 				var agree=confirm("Are you sure you want to delete node: " + nodeName + "?");
