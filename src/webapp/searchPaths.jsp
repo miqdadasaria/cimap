@@ -26,10 +26,10 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 	      	<div class="container">
 				<form method="post" action="SearchPaths">
 					<input type="hidden" name="pathQuery" value="search">
-					
+
 					<div class="form-group">
 					    <label for="startNode">Start Node</label>
-					    <select class="form-control" id="startNode" name="startNode">
+					    <select class="selectpicker" data-live-search="true" data-width="fit" id="startNode" name="startNode">
 						<%
 						Iterator<Node> i = nodes.iterator();
 						Node current;
@@ -42,7 +42,7 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 
 					<div class="form-group">
 					    <label for="endNode">End Node</label>
-					    <select class="form-control" id="endNode" name="endNode">
+					    <select class="selectpicker" data-live-search="true" data-width="fit" id="endNode" name="endNode">
 						<%
 						Iterator<Node> j = nodes.iterator();
 						while(j.hasNext()){
@@ -55,7 +55,7 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 
 					<div class="form-group">
 					    <label for="maxLength">Maximum path length</label>
-					    <select class="form-control" id="maxLength" name="maxLength">
+					    <select class="selectpicker" data-live-search="true" data-width="fit" id="maxLength" name="maxLength">
 						<% for(int k = 1; k<11; k++){%>
 						<option value="<%=k%>" <% if(k==5){%>selected<%}%>><%=k%></option>
 						<%}%>
@@ -66,5 +66,5 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 				</form>
 			</div>
 		</div>
-
+	</div>
 <%}%>

@@ -32,6 +32,7 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 	    <title><%=getServletContext().getInitParameter("app_name")%></title>
 	    <!-- Bootstrap core CSS -->
 	    <link href="./css/bootstrap.min.css" rel="stylesheet">
+	    <link href="./css/bootstrap-select.css" rel="stylesheet">
 		<script language="javascript" type="text/javascript">
 			function confirmDeleteNode(nodeName){
 				var agree=confirm("Are you sure you want to delete node: " + nodeName + "?");
@@ -184,6 +185,7 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script>window.jQuery</script>
     <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/bootstrap-select.js"></script>
 </body>
 </html>
 <%}%>
