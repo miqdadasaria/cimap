@@ -20,16 +20,12 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 	String type = node.getType().getTypeName();
 	DateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
 %>
-<center>
-<table>
-<tr>
-<td valign="center">
-<div id="left">
-	
-	<div class="small-title"><%=getServletContext().getInitParameter("app_name")%></div>
-	<div class="small-title2">Update Node <%= node.getName()%></div>
-	<div class="element contained-item">
-			<div class="inner" id="inner-details">
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Update Node <%= node.getName()%></h3>
+  </div>
+  <div class="panel-body">
+
 				<form method="post" action="UpdateNode" enctype="multipart/form-data">
 					<h3>Update Node</h3>
 					<h4>Name</h4>
@@ -230,13 +226,6 @@ if(!type.equals("Publication")){
 						</tr>
 					</table>
 					</center>
-			</div>
 	</div>
 </div>
-
-</td>
-</tr>
-</table>
-
-</center>
 <% } %>

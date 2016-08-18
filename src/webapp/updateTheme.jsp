@@ -19,16 +19,12 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 		int themeId = Integer.parseInt(id);
 		Theme theme = MasterGraph.getTheme(themeId);
 %>
-<center>
-<table>
-<tr>
-<td valign="center">
-<div id="left">
-	
-	<div class="small-title"><%=getServletContext().getInitParameter("app_name")%></div>
-	<div class="small-title2">Update Theme</div>
-	<div class="element contained-item">
-			<div class="inner" id="inner-details">
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Update Theme</h3>
+  </div>
+  <div class="panel-body">
+
 				<form method="post" action="AddOrUpdate">
 					<h3>Update Theme</h3>
 					<h4>Name</h4>
@@ -65,13 +61,7 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 						</tr>
 					</table>
 					</center>
-			</div>
 	</div>
 </div>
 
-</td>
-</tr>
-</table>
-
-</center>
 <% }}%>

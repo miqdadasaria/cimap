@@ -14,40 +14,68 @@ if(session.getAttribute("username") != null && (((User)(session.getAttribute("us
 	session.invalidate();
 }
 %>
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	    <meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <title><%=getServletContext().getInitParameter("app_name")%></title>
+	    <!-- Bootstrap core CSS -->
+	    <link href="./css/bootstrap.min.css" rel="stylesheet">
 
-<center>
-<table>
-<tr>
-<td valign="center">
-<div id="left">
-	
-	<div class="small-title"><%=getServletContext().getInitParameter("app_name")%></div>
-	<div class="small-title2">Login</div>
-	<div class="element contained-item">
-			<div class="inner" id="inner-details">
-				<form method="post" action="Login">
-					<h3>Login</h3>
-					<h4>Username</h4>
-					<input type="text" name="username">
-					<h4>Password</h4>
-					<input type="password" name="password">
-					<center>
-					<p></p>
-					<table>
-						<tr>
-						<td>
-							<input type="submit" name="Login" value="Login">
-						</td>
-						</tr>
-					</table>
-					</center>
-				</form>
-			</div>
+	</head>
+	<body>
+		<div class="container">
+
+	      <nav class="navbar navbar-inverse navbar-fixed-top">
+	        <div class="container">
+	          <div class="navbar-header">
+	            <a class="navbar-brand" href="#">
+		            <%=getServletContext().getInitParameter("app_name")%>
+	            </a>
+	          </div>
+
+	          <div id="navbar" class="collapse navbar-collapse pull-right">
+	            <ul class="nav navbar-nav">
+	              <li class=""><a href="login.jsp">Logout</a></li>
+	            </ul>
+	          </div>
+	        </div>
+	      </nav>
+
+      <div class="page-header">
+        <h1></h1>
+      </div>
+
+	   <div class="panel panel-default">
+	      <div class="panel-heading">
+	        <h3 class="panel-title">Login</h3>
+	      </div>
+	      <div class="panel-body">
+			<form method="post" action="Login">
+				<h3>Login</h3>
+				<h4>Username</h4>
+				<input type="text" name="username">
+				<h4>Password</h4>
+				<input type="password" name="password">
+				<center>
+				<p></p>
+				<table>
+					<tr>
+					<td>
+						<input type="submit" name="Login" value="Login">
+					</td>
+					</tr>
+				</table>
+				</center>
+			</form>
+	      </div>
+	    </div>
+
 	</div>
-</div>
-
-</td>
-</tr>
-</table>
-
-</center>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery</script>
+    <script src="./js/bootstrap.min.js"></script>
+  </body>
+  </html>

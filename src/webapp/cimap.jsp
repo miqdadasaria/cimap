@@ -11,308 +11,179 @@ response.setDateHeader ("Expires", -1);
 User user;
 String query = request.getParameter("query");
 String tab = "login";
-
 if(session.getAttribute("username") == null || !(((User)(session.getAttribute("username"))).isLoggedIn())){
 	user = null;
+	String url = "login.jsp";
+	response.sendRedirect(url);
 } else {
 	user = (User)(session.getAttribute("username"));
 	if (request.getParameter("tab") != null && !request.getParameter("tab").equals("")){
 		tab = request.getParameter("tab");
-	}
-}
-%>
-<html lang="en">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title><%=getServletContext().getInitParameter("app_name")%></title>
-
-<link type="text/css" rel="stylesheet" href="./css/cimap-tabber.css" />
-<link type="text/css" rel="stylesheet" href="./css/infovis.css" />
-<link type="text/css" rel="stylesheet" href="./css/datepicker.css" />
-
-<script language="javascript" type="text/javascript" src="./js/datepicker.js"></script>
-<script language="javascript" type="text/javascript" src="./js/prototype.js"></script>
-
-<script language="javascript" type="text/javascript">
-function confirmDeleteNode(nodeName)
-{
-var agree=confirm("Are you sure you want to delete node: " + nodeName + "?");
-if (agree)
-	return true ;
-else
-	return false ;
-}
-function confirmDeleteTheme(themeName)
-{
-var agree=confirm("Are you sure you want to delete theme: " + themeName + "?");
-if (agree)
-	return true ;
-else
-	return false ;
-}
-function confirmDeleteUser(userName)
-{
-var agree=confirm("Are you sure you want to delete user: " + userName + "?");
-if (agree)
-	return true ;
-else
-	return false ;
-}
-function confirmDeleteList(listName)
-{
-var agree=confirm("Are you sure you want to delete contact lis: " + listName + "?");
-if (agree)
-	return true ;
-else
-	return false ;
-}
-function confirmDeleteEdge()
-{
-var agree=confirm("Are you sure you want to delete this relationship?");
-if (agree)
-	return true ;
-else
-	return false ;
-}
-
-</script>
-
-<script type="text/javascript">
-
-/* Optional: Temporarily hide the "tabber" class so it does not "flash"
-   on the page as plain HTML. After tabber runs, the class is changed
-   to "tabberlive" and it will appear. */
-
-document.write('<style type="text/css">.tabber{display:none;}<\/style>');
-
-var tabberOptions = {
-
-  'onClick': function(argsObj) {
-
-    var t = argsObj.tabber; /* Tabber object */
-    var i = argsObj.index; /* Which tab was clicked (0..n) */
-    var div = this.tabs[i].div; /* The tab content div */
-    var id = div.id;
-	if(id==undefined){
-		id = '<%= tab %>';
-	}
-    
-	/* Display a loading message */
-    div.innerHTML = "<p>Loading...<\/p>";
-
-    /* Fetch some html depending on which tab was clicked */
-    var url = 'login.jsp';
-	if(id=='themes'){
-		<%
-		String update = (String)(session.getAttribute("update"));
-		if(update != null && update.equals("updateTheme")){%>
-			url = 'updateTheme.jsp';
-		<%} else if(update != null && update.equals("addTheme")){%>
-			url= 'addTheme.jsp';
-		<%} else if(session.getAttribute("themeid") != null){%>
-			url = 'themeDetails.jsp';
-		<%} else {%>
-			url = 'themes.jsp';
-		<%}%>
-		t.tabShow(0);
-	} else if (id=='search'){
-		<%if(session.getAttribute("query") != null){%>
-			url = 'searchResults.jsp';
-		<%}else{%>
-			url= 'search.jsp';
-		<%}%>
-		t.tabShow(1);
-	} else if (id=="searchpaths"){
-		<%if(session.getAttribute("pathQuery") != null){%>
-			url = 'searchPathsResults.jsp';
-		<%}else{%>
-			url = 'searchPaths.jsp';
-		<%}%>
-		t.tabShow(2);
-	} else if (id=='nodedetails'){
-		<%if(update != null){
-			if(update.equals("nodeTheme")){%>
-				url='updateNodeTheme.jsp';
-			<%} else if (update.equals("addNode")){%>
-				url='addNode.jsp';
-			<%} else if (update.equals("nodeNews")){%>
-				url='addNews.jsp';
-			<%} else if (update.equals("updateNode")){%>
-				url='updateNode.jsp';
-			<%} else if (update.equals("addEdge")){%>
-				url='addRelatedNode.jsp';
-			<%} else if(update.equals("updateEdge")){%>
-				url = 'updateEdge.jsp';
-			<%} else if(update.equals("edgeDetails")){%>
-				url = 'edgeDetails.jsp';
-			<%}
-		}else {%>
-			url = 'nodeDetails.jsp';
-		<%}%>
-		t.tabShow(3);
-	} else if (id=='contactlist'){
-		<%if(update != null && update.equals("updateContactList")){%>
-			url = 'updateContactList.jsp';
-		<%} else if(update != null && update.equals("addContactList")){%>
-			url = 'addContactList.jsp';
-		<%} else if(update != null && update.equals("addContacts")){%>
-			url = 'addContacts.jsp';
-		<%} else if(update != null && update.equals("addContacts2")){%>
-			url = 'addContacts2.jsp';
-		<%} else if(session.getAttribute("contactListId") != null){%>
-			url = 'contactListDetails.jsp';
-		<%} else {%>
-			url = 'contactLists.jsp';
-		<%}%>
-		t.tabShow(4);
-	} else if (id=="useradmin"){
-		<%if(update !=null && update.equals("addUser")){%>
-			url = 'addUser.jsp'
-		<%}else if(update !=null && update.equals("updateUser")){%>
-			url = 'updateUser.jsp';
-		<%} else {%>
-			url = 'userAdmin.jsp';
-		<%}%>
-		t.tabShow(5);
-	} else if (id=="logout"){
-		url = 'login.jsp';
-		t.tabShow(6);
-	} else if (id=="help"){
-		url = 'userGuide.jsp';
-		t.tabShow(7);
-	}
-    var pars = '';
-<%
-	if(query!=null){
-%>
-	pars = pars+'query="<%=query%>"';
-<%
-  }
-%>
-    var myAjax = new Ajax.Updater(div, url, {method:'get',parameters:pars});
-  },
-
-  'onLoad': function(argsObj) {
-    /* Load the first tab */
-<%
-	if(tab.equals("search")){
-%>
-	argsObj.index = 1;
-<%
-	} else if(tab.equals("searchpaths")){
-%>
-	argsObj.index = 2;
-<%
-	} else if(tab.equals("nodedetails")){
-%>
-	argsObj.index = 3;
-<%
-	} else if(tab.equals("contactlist")){
-%>
-	argsObj.index = 4;
-<%
-	} else if(tab.equals("useradmin")){
-%>
-	argsObj.index = 5;
-<%
-	} else if(tab.equals("logout")){
-%>
-	argsObj.index = 6;
-<%
-	} else if(tab.equals("help")){
-%>
-	argsObj.index = 7;
-<%
 	} else {
+		tab = "themes";
+	}
 %>
-	argsObj.index = 0;
-<%
-}
-%>
-	this.onClick(argsObj);
-  }
-
-}
-
-</script>
-
-<script type="text/javascript" src="./js/tabber.js"></script>
-
-<style type="text/css">
-.tabberlive .tabbertab {
-  #height:350px;
-}
-</style>
-</head>
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	    <meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <title><%=getServletContext().getInitParameter("app_name")%></title>
+	    <!-- Bootstrap core CSS -->
+	    <link href="./css/bootstrap.min.css" rel="stylesheet">
+		<script language="javascript" type="text/javascript">
+			function confirmDeleteNode(nodeName){
+				var agree=confirm("Are you sure you want to delete node: " + nodeName + "?");
+				if (agree)
+					return true ;
+				else
+					return false ;
+			}
+			function confirmDeleteTheme(themeName){
+				var agree=confirm("Are you sure you want to delete theme: " + themeName + "?");
+				if (agree)
+					return true ;
+				else
+					return false ;
+			}
+			function confirmDeleteUser(userName){
+				var agree=confirm("Are you sure you want to delete user: " + userName + "?");
+				if (agree)
+					return true ;
+				else
+					return false ;
+			}
+			function confirmDeleteList(listName){
+				var agree=confirm("Are you sure you want to delete contact lis: " + listName + "?");
+				if (agree)
+					return true ;
+				else
+					return false ;
+			}
+			function confirmDeleteEdge(){
+				var agree=confirm("Are you sure you want to delete this relationship?");
+				if (agree)
+					return true ;
+				else
+					return false ;
+			}
+		</script>
+	</head>
 <body>
+    
+	<div class="container">
 
-<div class="topmenu">
-	<table width="100%" bgcolor="#339933">
-		<tr>
-			<td align="left">
-				<h1><%=getServletContext().getInitParameter("app_name")%></h1>
-			</td>
-			<td align="right">
-				<h2>Current Node:
+	      <nav class="navbar navbar-inverse navbar-fixed-top">
+	        <div class="container">
+	          <div class="navbar-header">
+	            <a class="navbar-brand" href="#">
+		            <%=getServletContext().getInitParameter("app_name")%>
+	            </a>
+	          </div>
+
+	          <div id="navbar" class="collapse navbar-collapse pull-right">
+	            <ul class="nav navbar-nav">
+	              <li class=""><a href="userGuide.jsp">Tutorial</a></li>
+	              <li class=""><a href="login.jsp">Logout</a></li>
+	            </ul>
+	          </div>
+	        </div>
+	      </nav>
+
+      <div class="page-header">
+        <h1></h1>
+      </div>
+
+	    <div>
+	        <!-- Nav tabs -->
+	        <ul class="nav nav-tabs" role="tablist">
+	          <li role="presentation" <%if(tab.equals("themes")){%>class="active"<%}%>><a href="#theme" aria-controls="theme" role="tab" data-toggle="tab">Themes</a></li>
+	         <li role="presentation" <%if(tab.equals("search")){%>class="active"<%}%>><a href="#search" aria-controls="search" role="tab" data-toggle="tab">Search</a></li>
+	         <li role="presentation" <%if(tab.equals("searchpaths")){%>class="active"<%}%>><a href="#paths" aria-controls="paths" role="tab" data-toggle="tab">Search Paths</a></li>
+	          <li role="presentation" <%if(tab.equals("nodedetails")){%>class="active"<%}%>><a href="#details" aria-controls="details" role="tab" data-toggle="tab">Node Details</a></li>
+			<%if(user.getType() >= User.SUPERUSER){%>
+		      <li role="presentation" <%if(tab.equals("useradmin")){%>class="active"<%}%>><a href="#admin" aria-controls="admin" role="tab" data-toggle="tab">Admin</a></li>
+	        <%}%>
+	        </ul>
+
+	        <!-- Tab panes -->
+	        <div class="tab-content">
+
+	          <div role="tabpanel" class="tab-pane <%if(tab.equals("themes")){%>active<%}%>" id="theme">
+	          	<%
+				String update = (String)(session.getAttribute("update"));
+				String themeurl = "themes.jsp";
+				if(update != null && update.equals("updateTheme")){
+					themeurl = "updateTheme.jsp";
+				} else if(update != null && update.equals("addTheme")){
+					themeurl= "addTheme.jsp";
+				} else if(session.getAttribute("themeid") != null){
+					themeurl = "themeDetails.jsp";
+				}%>
+				<jsp:include page="<%=themeurl%>"/>
+	          </div>
+
+	          <div role="tabpanel" class="tab-pane <%if(tab.equals("nodedetails")){%>active<%}%>" id="details">
 				<%
-					if(user != null && user.getGraph().getSelected() != null){
-				%>
-						<a href="cimap.jsp?tab=nodedetails"><%= user.getGraph().getSelected().getName()%></a>
-				<%
-					} else {
-				%>
-					N/A
-				<%	
+				String nodeurl = "nodeDetails.jsp";
+				if(update != null){
+					if(update.equals("nodeTheme")){
+						nodeurl="updateNodeTheme.jsp";
+					} else if (update.equals("addNode")){
+						nodeurl="addNode.jsp";
+					} else if (update.equals("nodeNews")){
+						nodeurl="addNews.jsp";
+					} else if (update.equals("updateNode")){
+						nodeurl="updateNode.jsp";
+					} else if (update.equals("addEdge")){
+						nodeurl="addRelatedNode.jsp";
+					} else if(update.equals("updateEdge")){
+						nodeurl = "updateEdge.jsp";
+					} else if(update.equals("edgeDetails")){
+						nodeurl = "edgeDetails.jsp";
 					}
-				%>
-				</h2>	
-			</td>
-		</tr>
-	</table>
-</div>
+				}%>
+					<jsp:include page="<%=nodeurl%>"/>
+	          </div>
+
+	          <div role="tabpanel" class="tab-pane <%if(tab.equals("search")){%>active<%}%>" id="search">
+	          	<%String searchurl = "search.jsp";
+				if(session.getAttribute("query") != null){
+					searchurl = "searchResults.jsp";
+				}%>
+				<jsp:include page="<%=searchurl%>"/>				
+	          </div>
+  
+	          <div role="tabpanel" class="tab-pane <%if(tab.equals("searchpaths")){%>active<%}%>" id="paths">
+				<%String pathurl = "searchPaths.jsp";
+				if(session.getAttribute("pathQuery") != null){
+					pathurl = "searchPathsResults.jsp";
+				}%>
+				<jsp:include page="<%=pathurl%>"/>
+	          </div>
 
 
-<div class="tabber">
-     <div class="tabbertab" id="themes">
-	  <h2>Themes</h2>
-     </div>
 
-	 <div class="tabbertab" id="search">
-	  <h2>Search</h2>
-     </div>
+		 	<%if(user.getType() >= User.SUPERUSER){%>
+	          <div role="tabpanel" class="tab-pane <%if(tab.equals("useradmin")){%>active<%}%>" id="admin">
+	           		<%String adminurl = "userAdmin.jsp";
+	           		if(update !=null && update.equals("addUser")){
+						adminurl = "addUser.jsp";
+					} else if(update !=null && update.equals("updateUser")){
+						adminurl = "updateUser.jsp";
+					}%>
+					<jsp:include page="<%=adminurl%>"/>
+	          </div>
+	   		<%}%>
 
-	<div class="tabbertab" id="searchpaths">
-	  <h2>Search Paths</h2>
+    	</div>
+
     </div>
 
-     <div class="tabbertab" id="nodedetails">
-	  <h2>Node Details</h2>
-     </div>
-
-	<%if(user!=null){%>
-
-	<%if(user.getType() >= User.ADMIN){%>
-	 <div class="tabbertab" id="contactlist">
-	  <h2>Contact Lists</h2>
-     </div>
-	<%}%>
-
-	<%if(user.getType() >= User.SUPERUSER){%>
-     <div class="tabbertab" id="useradmin">
-	  <h2>User Admin</h2>
-     </div>
-	<%}%>
-
-	<%}%>
-	<div class="tabbertab" id="logout">
-	  <h2>Logout</h2>
-    </div>
-
-	<div class="tabbertab" id="help">
-	  <h2>User Guide</h2>
-    </div>
-
-</div>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery</script>
+    <script src="./js/bootstrap.min.js"></script>
 </body>
 </html>
+<%}%>

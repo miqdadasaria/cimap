@@ -18,17 +18,13 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 	ArrayList<Theme> nodeTheme = node.getThemes();
 	ArrayList<Theme> themes = MasterGraph.getThemeList();
 %>
-<center>
-<table>
-<tr>
-<td valign="center">
-<div id="left">
-	
-	<div class="small-title"><%=getServletContext().getInitParameter("app_name")%></div>
-	<div class="small-title2">Update Themes for <%= node.getName()%></div>
-	<div class="element contained-item">
-			<div class="inner" id="inner-details">
-				<h3>Update Node Themes</h3>
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Update Node Themes</h3>
+  </div>
+  <div class="panel-body">
+
 				<form method="post" action="AddOrUpdate">
 				<%
 					Iterator<Theme> i = themes.iterator();
@@ -60,13 +56,6 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 						</tr>
 					</table>
 					</center>
-			</div>
 	</div>
 </div>
-
-</td>
-</tr>
-</table>
-
-</center>
 <% } %>

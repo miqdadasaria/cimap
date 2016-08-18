@@ -4,16 +4,47 @@ response.setHeader("Pragma","no-cache");
 response.setDateHeader ("Expires", -1); 
 %>
 <%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
-<center>
-<table>
-<tr>
-<td valign="center">
-<div id="left">
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	    <meta charset="utf-8">
+	    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <title><%=getServletContext().getInitParameter("app_name")%></title>
+	    <!-- Bootstrap core CSS -->
+	    <link href="./css/bootstrap.min.css" rel="stylesheet">
+	</head>
+<body>
+	<div class="container">
+
+	      <nav class="navbar navbar-inverse navbar-fixed-top">
+	        <div class="container">
+	          <div class="navbar-header">
+	            <a class="navbar-brand" href="cimap.jsp">
+		            <%=getServletContext().getInitParameter("app_name")%>
+	            </a>
+	          </div>
+
+	          <div id="navbar" class="collapse navbar-collapse pull-right">
+	            <ul class="nav navbar-nav">
+	              <li class=""><a href="userGuide.jsp">Tutorial</a></li>
+	              <li class=""><a href="login.jsp">Logout</a></li>
+	            </ul>
+	          </div>
+	        </div>
+	      </nav>
+
+      <div class="page-header">
+        <h1></h1>
+      </div>
+
+
 	
-	<div class="small-title"><%=getServletContext().getInitParameter("app_name")%></div>
-	<div class="small-title2">User Guide</div>
-	<div class="element contained-item">
-			<div class="inner" id="inner-details">
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Tutorial</h3>
+  </div>
+  <div class="panel-body">
 			<h3><%=getServletContext().getInitParameter("app_name")%> - User Guide</h3>
 			<h4>Introduction</h4>
 			<p>The <%=getServletContext().getInitParameter("app_name")%> allows a group of users to work together to build up a dynamically evolving shared knowledge base. It is primarily used as a research tool for mapping out context. It also has event and contact management functionality. The core concept is that of a graph visualising relationships between the nodes of information stored in the system. It can be thought of as a cross between wikipedia and facebook.</p>
@@ -44,12 +75,11 @@ response.setDateHeader ("Expires", -1);
 			<p>The search functionality allows you to locate nodes in the system. The more fields you fill in the more restrictive the search is i.e. results must meet all conditions entered. For admin users the search results can be added to a contact list by clicking on the add to contact list icon: <img src="images/contacts.png" alt="add to contacts"> on the search results page.</p>
 			<h5>User Admin</h5>
 			<p>Super users have the ability to set up new user, set permissions for them, monitor their usage, set view and update quotas for users and remove users from the system.</p>
-			</div>
+
 	</div>
 </div>
-
-</td>
-</tr>
-</table>
-
-</center>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery</script>
+    <script src="./js/bootstrap.min.js"></script>
+</body>
+</html>

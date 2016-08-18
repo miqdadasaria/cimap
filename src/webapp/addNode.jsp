@@ -17,16 +17,13 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 		ArrayList<NodeType> nts = MasterGraph.getNodeTypeList();
 		Node node = user.getGraph().getSelected();
 %>
-<center>
-<table>
-<tr>
-<td valign="center">
-<div id="left">
-	
-	<div class="small-title"><%=getServletContext().getInitParameter("app_name")%></div>
-	<div class="small-title2">Add Node</div>
-	<div class="element contained-item">
-			<div class="inner" id="inner-details">
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Add Node</h3>
+  </div>
+  <div class="panel-body">
+
 				<form method="post" action="AddOrUpdate">
 					<h3>Add Node</h3>
 					<h4>Name</h4>
@@ -63,14 +60,7 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 				</tr>
 			</table>
 			</center>
-				
-			</div>
+
 	</div>
 </div>
-
-</td>
-</tr>
-</table>
-
-</center>
 <% } }%>

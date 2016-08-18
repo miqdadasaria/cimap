@@ -17,18 +17,11 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 User user = (User)(session.getAttribute("username"));
 if (user.getGraph().getSelected() == null){
 %>
-<center>
-<table>
-<tr>
-<td valign="center">
-<div id="left">
-	
-	<div class="small-title"><%=getServletContext().getInitParameter("app_name")%></div>
-	<div class="small-title2">Add Node</div>
-	<div class="element contained-item">
-		<div class="inner" id="inner-details">
-			<p></p>
-			<center>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Add Node</h3>
+      </div>
+      <div class="panel-body">
 			<table>
 				<tr>
 				<td>
@@ -39,16 +32,8 @@ if (user.getGraph().getSelected() == null){
 				</td>
 				</tr>
 			</table>
-			</center>
-		</div>
-	</div>
-</div>
-
-</td>
-</tr>
-</table>
-</center>
-
+	  </div>
+	 </div>
 <%
 } else {
 	currentNode = user.getGraph().getSelected();
@@ -56,18 +41,11 @@ if (user.getGraph().getSelected() == null){
 	DateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
 	String type = currentNode.getType().getTypeName();
 %>
-
-<center>
-<table>
-<tr>
-<td valign="center">
-<div id="left">
-
-
-	<div class="small-title"><%=getServletContext().getInitParameter("app_name")%></div>
-	<div class="small-title2">Details for: <%= currentNode.getName()%></div>
-	<div class="element contained-item">
-		<div class="inner" id="inner-details">
+   <div class="panel panel-default">
+	<div class="panel-heading">
+		Details for: <%= currentNode.getName()%>
+	</div>
+	<div class="panel-body">
 				<p align="right">
 				<table>
 				<tr>
@@ -88,26 +66,16 @@ if (user.getGraph().getSelected() == null){
 				<td>
 					<form method="post" action="AddNodeDetail">
 					<input type="hidden" name="detail" value="node" />
-					<!--input type="submit" name="submit" value="Add New Node" /-->
 					<button name="submit" value="submit" type="submit"><img src="images/new.png" alt="add new node"></button>
 					</form>
 				</td>
-				<% if(user.getType() >=User.ADMIN && MasterGraph.getContactLists().size() > 0){%>
-				<td>
-					<form method="post" action="ContactLists">
-					<input type="hidden" name="update" value="currentNode" />
-					<!--input type="submit" name="submit" value="Add to Contact List" /-->
-					<button name="submit" value="submit" type="submit"><img src="images/contacts.png" alt="export to contacts list"></button>
-					</form>
-				</td>
-				<%}%>
 				</tr>
 			</table>
 			</p>
 			<h3>Node Details</h3>
-			<%if(currentNode.getPhotograph() != null){ %>
+			<%if(currentNode.getPhotograph() != null){%>
 				<img src="<%= currentNode.getPhotograph() %>" border="0">
-			<%} %>
+			<%}%>
 			<h4>Name</h4> <a href="JSON?id=<%= currentNode.getId() %>"><%= currentNode.getName() %></a> <br />
 			<h4>Type</h4>
 			<%= type %> - <%= currentNode.getType().getSubTypeName()%>
@@ -178,7 +146,9 @@ if (user.getGraph().getSelected() == null){
 
 			<% if(currentNode.getBackground() != null) {%>
 			<h4>Background</h4>
+			<div class="well">
 			<%= currentNode.getBackground() %><br />
+			</div>
 			<% } %>
 			<h4>Themes</h4>
 			<% 
@@ -327,12 +297,7 @@ if (user.getGraph().getSelected() == null){
 			<% }%>
 				Last Modified Date: <%= currentNode.getLastModified()%><br />
 				View Count: <%= currentNode.getViewCount()%><br />
-			</div>
-	</div>
-</div>
 
-</td>
-</tr>
-</table>
-</center>
+		</div>
+	</div>
 <%}}%>

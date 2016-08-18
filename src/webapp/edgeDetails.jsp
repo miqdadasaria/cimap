@@ -29,16 +29,14 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 		DateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
 
 %>
-<center>
-<table>
-<tr>
-<td valign="center">
-<div id="left">
-	
-	<div class="small-title"><%=getServletContext().getInitParameter("app_name")%></div>
-	<div class="small-title2">Relationship Between <a href="NodeDetails?nodeId=<%= node1.getId()%>"><%= node1.getName() %></a> and <a href="NodeDetails?nodeId=<%= node2.getId()%>"><%= node2.getName() %></a></div>
-	<div class="element contained-item">
-		<div class="inner" id="inner-details">
+
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Relationship Between <a href="NodeDetails?nodeId=<%= node1.getId()%>"><%= node1.getName() %></a> and <a href="NodeDetails?nodeId=<%= node2.getId()%>"><%= node2.getName() %></a></h3>
+  </div>
+  <div class="panel-body">
+
+
 			<% if(user.getType() >=User.ADMIN){%>
 				<p align="right">
 				<table>
@@ -94,12 +92,6 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 				</tr>
 			</table>
 			</center>
-			</div>
 	</div>
 </div>
-
-</td>
-</tr>
-</table>
-</center>
 <%}}%>

@@ -16,16 +16,14 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 	SearchPathsQuery query = (SearchPathsQuery)(session.getAttribute("pathQuery"));
 	ArrayList<Path> paths = (ArrayList<Path>)(session.getAttribute("searchPathsResults"));
 %>
-<center>
-<table>
-<tr>
-<td valign="center">
-<div id="left">
 
-<div class="small-title"><%=getServletContext().getInitParameter("app_name")%></div>
-	<div class="small-title2">Paths Search Results</div>
-	<div class="element contained-item">
-		<div class="inner" id="inner-details">
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Search Path Results</h3>
+  </div>
+  <div class="panel-body">
+
+
 				<h3><%= paths.size()%> paths found between <a href="NodeDetails?nodeId=<%=query.getStartNode().getId() %>"><%= query.getStartNode().getName()%></a> and <a href="NodeDetails?nodeId=<%=query.getEndNode().getId() %>"><%= query.getEndNode().getName()%></a> of length less than or equal to <%= query.getMaxLength()%></h3>
 <%
 			Iterator<Path> p = paths.iterator();
@@ -66,16 +64,9 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 					</tr>
 				</table>
 				</center>
-		</div>
-	</div>
-
+    </div>
 </div>
 
-</td>
-</tr>
-</table>
-
-</center>
 <%
 }
 %>

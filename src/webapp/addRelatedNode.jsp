@@ -32,42 +32,23 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 	if(node.getType().getTypeName().equals(otherNodeType))
 		currentNodes.add(node);
 	ArrayList<EdgeType> ets = MasterGraph.getCompatibleEdgeTypeList(node.getType(), otherNodeType);
+%>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Add Relationship to <%= node.getType().getTypeName()%> Node <%= node.getName()%></h3>
+  </div>
+  <div class="panel-body">
+<%
 	if((nodes.size()-currentNodes.size())<=0){
 %>
-<center>
-<table>
-<tr>
-<td valign="center">
-<div id="left">
-	
-	<div class="small-title"><%=getServletContext().getInitParameter("app_name")%></div>
-	<div class="small-title2">Add Relationship to <%= node.getType().getTypeName()%> Node <%= node.getName()%></div>
-	<div class="element contained-item">
-			<div class="inner" id="inner-details">
+
 	There are no <%= otherNodeType %> nodes in the system that this node is not already connected to. Please add the relevant nodes first - <a href="cimap.jsp?tab=nodedetails">click here to go back to node</a>
-			</div>
-	</div>
-</div>
 
-</td>
-</tr>
-</table>
-
-</center>
 <%		
 	} else {
 
 %>
-<center>
-<table>
-<tr>
-<td valign="center">
-<div id="left">
-	
-	<div class="small-title"><%=getServletContext().getInitParameter("app_name")%></div>
-	<div class="small-title2">Add Relationship to <%= node.getType().getTypeName()%> Node <%= node.getName()%></div>
-	<div class="element contained-item">
-			<div class="inner" id="inner-details">
+
 				<form method="post" action="AddOrUpdate">
 				<h3>Add Relationship</h3>
 				<h4>Node</h4>
@@ -119,13 +100,9 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 						</tr>
 					</table>
 					</center>
-			</div>
+
+
+<%}%>
 	</div>
 </div>
-
-</td>
-</tr>
-</table>
-
-</center>
-<%}}%>
+<%}%>

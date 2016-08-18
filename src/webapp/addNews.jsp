@@ -15,16 +15,12 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 	User user = (User)(session.getAttribute("username"));
 	Node node = user.getGraph().getSelected();
 %>
-<center>
-<table>
-<tr>
-<td valign="center">
-<div id="left">
-	
-	<div class="small-title"><%=getServletContext().getInitParameter("app_name")%></div>
-	<div class="small-title2">Add News for <%= node.getName()%></div>
-	<div class="element contained-item">
-			<div class="inner" id="inner-details">
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Add News for <%= node.getName()%></h3>
+  </div>
+  <div class="panel-body">
+
 				<form method="post" action="AddOrUpdate">
 					<h3>Add News Coverage</h3>
 					<h4>Headline</h4>
@@ -54,13 +50,6 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 					</table>
 					</center>
 				
-			</div>
-	</div>
 </div>
-
-</td>
-</tr>
-</table>
-
-</center>
+</div>
 <% } %>
