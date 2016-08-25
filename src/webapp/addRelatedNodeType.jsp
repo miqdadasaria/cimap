@@ -27,7 +27,7 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 %>
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">Add Relatationship to <%= node.getType().getTypeName()%> Node <%= node.getName()%></h3>
+    <h3 class="panel-title">Add Relatationship to <%= node.getType().getTypeName()%> Node: <%= node.getName()%></h3>
   </div>
   <div class="panel-body">
 

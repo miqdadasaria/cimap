@@ -35,7 +35,7 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 %>
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">Add Relationship to <%= node.getType().getTypeName()%> Node <%= node.getName()%></h3>
+    <h3 class="panel-title">Add Relationship to <%= node.getType().getTypeName()%> Node: <%= node.getName()%></h3>
   </div>
   <div class="panel-body">
 <%
@@ -49,58 +49,69 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 
 %>
 
-				<form method="post" action="AddOrUpdate">
-				<h3>Add Relationship</h3>
-				<h4>Node</h4>
-				<select name="node">
-				<%
-					Iterator<Node> i = nodes.iterator();
-					Node current;
-					while(i.hasNext()){
-						current = i.next();
-						if(!currentNodes.contains(current)){%>
-							<option value="<%= current.getId()%>"><%= current.getName()%></option>	
-				<%		}
-					}%>
-				</select><br />
-				<h4>Edge Type</h4>
-				<select name="edgeType">
-				<%
-					Iterator<EdgeType> ie = ets.iterator();
-					EdgeType currentEdge;
-					while(ie.hasNext()){
-						currentEdge = ie.next();
-					%>
-						<option value="<%= currentEdge.getId() %>"><%= currentEdge.getTypeName() %> - <%= currentEdge.getSubTypeName() %></option>
-				<%	}%>
-				</select><br />
-				<h4>Details</h4>
-				<textarea name="details" rows="10" cols="60"><a href="xxx" target="_blank">source</a></textarea><br />
-				<h4>Start Date</h4>
-					<input type="text" name="startDate"><input type=button value="select" onclick="displayDatePicker('startDate', false, 'dmy');"><br />
-				<h4>End Date</h4>
-					<input type="text" name="endDate"><input type=button value="select" onclick="displayDatePicker('endDate', false, 'dmy');"><br />
+	<form method="post" name="relatednodeform">
 
-					<input type="hidden" name="update" value="addEdge">
-					<input type="hidden" name="nodeId" value="<%= node.getId() %>">
-					<p></p>
-					<center>
-					<table>
-						<tr>
-						<td>
-							<input type="submit" name="submit" value="Apply">
-							</form>
-						</td>
-						<td>
-							<form method="post" action="NodeDetails">
-								<input type="hidden" name="nodeId" value="<%=node.getId()%>">
-								<input type="submit" name="submit" value="Cancel">
-							</form>
-						</td>
-						</tr>
-					</table>
-					</center>
+		<div class="form-group">
+		    <label for="node">Node</label>
+		    <select class="selectpicker" data-live-search="true" data-width="fit" id="node" name="node">
+			<%
+			Iterator<Node> i = nodes.iterator();
+			Node current;
+			while(i.hasNext()){
+				current = i.next();
+				%><option value="<%= current.getId()%>"><%= current.getName()%></option>	
+			<%	}%>
+			</select>
+		</div>
 
+		<div class="form-group">
+		    <label for="edgeType">Edge Type</label>
+		    <select class="selectpicker" data-live-search="true" data-width="fit" id="edgeType" name="edgeType">
+			<%
+			Iterator<EdgeType> ie = ets.iterator();
+			EdgeType currentEdge;
+			while(ie.hasNext()){
+				currentEdge = ie.next();
+			%>
+			<option value="<%= currentEdge.getId() %>"><%= currentEdge.getTypeName() %> - <%= currentEdge.getSubTypeName() %></option>
+			<%	}%>
+			</select>
+		</div>
+
+		<div class="form-group">
+		    <label for="details">Details</label>				
+			<textarea name="details" id="details" class="form-control" rows="10" cols="60"><a href="xxx" target="_blank">source</a></textarea>
+		</div>
+
+	  <div class="form-group">
+		<label for="startDate">Start Date</label>	
+		<input class="form-control" type="date" id="startDate" name="startDate">
+      </div>
+
+      <div class="form-group">
+		<label for="endDate">End Date</label>	
+		<input class="form-control" type="date" id="endDate" name="endDate">
+      </div>
+
+	<input type="hidden" name="update" value="addEdge">
+	<input type="hidden" name="nodeId" value="<%= node.getId() %>">
+
+		  <div class="form-group">
+		  	<button type="submit" class="btn btn-primary" value="Update" onclick="addRelNode();">Add Related Node</button>
+		  	<button type="submit" class="btn btn-primary" value="Cancel" onclick="cancelAddRelNode();">Cancel</button>
+		  	
+	  	  </div>
+	</form>
+
+  <script>
+    function addRelNode(){
+      document.relatednodeform.action = "AddOrUpdate";
+    }
+    function cancelAddRelNode(){
+      document.relatednodeform.action = "NodeDetails";
+    }
+  </script>
+	
 
 <%}%>
 	</div>

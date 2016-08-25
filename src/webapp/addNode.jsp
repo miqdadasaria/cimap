@@ -24,42 +24,48 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
   </div>
   <div class="panel-body">
 
-				<form method="post" action="AddOrUpdate">
-					<h3>Add Node</h3>
-					<h4>Name</h4>
-					<input type="text" name="name"><br />
-					<h4>Type</h4>
-					<select name="type">	
-				<%
-					Iterator<NodeType> i = nts.iterator();
-					NodeType current;
-					while(i.hasNext()){
-						current = i.next();
-				%>
-						<option value="<%= current.getId()%>"><%= current.getTypeName()%> - <%= current.getSubTypeName()%></option> 
-				<%	}%>
-					</select><br />
-					<input type="hidden" name="update" value="addNode">
-					<p></p>
-			<center>
-			<table>
-				<tr>
-					<td>
-					<input type="submit" name="submit" value="Add">
-					</form>
-					</td>
-					<td>
-						<form method="post" action="NodeDetails">
-							<%if(node!=null){%>
-							<input type="hidden" name="nodeId" value="<%=node.getId()%>">
-							<%}%>
-							<input type="submit" name="submit" value="Cancel">
-						</form>
-					</td>
+				<form method="post" name="addnodeform">
+			    <%if(node!=null){%>
+			    <input type="hidden" name="nodeId" value="<%=node.getId()%>">
+			    <%}%>
+						    
+					<div class="form-group">
+					    <label for="name">Name</label>				
+					  	<input type="text" name="name" id="name" class="form-control">
+					</div>
 
-				</tr>
-			</table>
-			</center>
+
+					<div class="form-group">
+					    <label for="type">Node Type</label>				
+						  <select name="type" class="selectpicker" data-live-search="true" data-width="fit" id="type">
+                <%
+        					Iterator<NodeType> i = nts.iterator();
+        					NodeType current;
+        					while(i.hasNext()){
+        						current = i.next();
+        				%>
+        						<option value="<%= current.getId()%>"><%= current.getTypeName()%> - 
+        						<%= current.getSubTypeName()%></option> 
+        				<%	}%>
+						  </select>
+					</div>				
+					<input type="hidden" name="update" value="addNode">
+
+          <div class="form-group">
+					  <button type="submit" class="btn btn-primary" value="Add" onclick="addNode();">Add</button>
+					  <button type="submit" class="btn btn-primary" value="Cancel" onclick="cancelAddNode();">Cancel</button>
+					</div>
+				</form>
+					
+  <script>
+    function addNode(){
+      document.addnodeform.action ="AddOrUpdate";
+    }
+    function cancelAddNode(){
+      document.addnodeform.action = "NodeDetails";
+    }
+  </script>
+
 
 	</div>
 </div>

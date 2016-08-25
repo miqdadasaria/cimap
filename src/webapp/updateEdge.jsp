@@ -36,10 +36,11 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
   </div>
   <div class="panel-body">
 
-				<form method="post" action="AddOrUpdateEdge">
-				<h3>Update Relationship</h3>
-				<h4>Relationship Type</h4>
-				<select name="edgeType">
+	<form method="post" name="updateedgeform">
+
+		<div class="form-group">
+		    <label for="edgeType">Relationship Type</label>
+		    <select class="selectpicker" data-live-search="true" data-width="fit" id="edgeType" name="edgeType">
 				<%
 					Iterator<EdgeType> i = ets.iterator();
 					EdgeType current;
@@ -50,33 +51,44 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 						<option value="<%= current.getId() %>" <% if(edge.getType().getId() == current.getId()){ out.print("selected");}%>><%= current.getTypeName() %> - <%= current.getSubTypeName() %></option>
 				<%	}
 				}%>
-				</select><br />
-				<h4>Details</h4>
-				<textarea name="details" rows="10" cols="60"><%	if(edge.getDetails() != null){ out.print(edge.getDetails());}else{%><a href="xxx" target="_blank">source</a><%}%></textarea><br />
-				<h4>Start Date</h4>
-					<input type="text" name="startDate" <% if(edge.getStartDate() != null){ out.print("value=\"" + fmt.format(edge.getStartDate()) +"\"");}%>><input type=button value="select" onclick="displayDatePicker('startDate', false, 'dmy');"><br />
-				<h4>End Date</h4>
-					<input type="text" name="endDate" <% if(edge.getEndDate() != null){ out.print("value=\"" + fmt.format(edge.getEndDate()) +"\"");}%>><input type=button value="select" onclick="displayDatePicker('endDate', false, 'dmy');"><br />
-					<input type="hidden" name="update" value="updateEdge">
-					<input type="hidden" name="edgeId" value="<%= edge.getId() %>">
-					<p></p>
-					<center>
-					<table>
-						<tr>
-						<td>
-							<input type="submit" name="submit" value="Apply">
-							</form>
-						</td>
-						<td>
-							<form method="post" action="EdgeDetails">
-								<input type="hidden" name="edgeId" value="<%= edge.getId()%>">
-								<input type="hidden" name="update" value="edgeDetails">
-								<input type="submit" name="submit" value="Cancel">
-							</form>
-						</td>
-						</tr>
-					</table>
-					</center>
+			</select>
+		</div>
+
+		<div class="form-group">
+		    <label for="details">Details</label>				
+			<textarea name="details" id="details" class="form-control" rows="10" cols="60"><%	if(edge.getDetails() != null){ out.print(edge.getDetails());}else{%><a href="xxx" target="_blank">source</a><%}%></textarea>
+		</div>
+
+		<div class="form-group">
+			<label for="startDate">Start Date</label>	
+			<input class="form-control" type="date" id="startDate" name="startDate" <% if(edge.getStartDate() != null){ out.print("value=\"" + fmt.format(edge.getStartDate()) +"\"");}%>>
+	    </div>
+
+	    <div class="form-group">
+			<label for="endDate">End Date</label>	
+			<input class="form-control" type="date" id="endDate" name="endDate" <% if(edge.getEndDate() != null){ out.print("value=\"" + fmt.format(edge.getEndDate()) +"\"");}%>>
+	    </div>			
+
+		<input type="hidden" name="update" value="updateEdge">
+		<input type="hidden" name="edgeId" value="<%= edge.getId() %>">
+
+	  <div class="form-group">
+	  	<button type="submit" class="btn btn-primary" value="Update" onclick="updateEdge();">Update Relationship</button>
+	  	<button type="submit" class="btn btn-primary" value="Cancel" onclick="cancelUpdateEdge();">Cancel</button>
+	  	
+  	  </div>
+	</form>
+
+  <script>
+    function updateEdge(){
+      document.updateedgeform.action = "AddOrUpdateEdge";
+    }
+    function cancelUpdateEdge(){
+      document.updateedgeform.action = "EdgeDetails";
+    }
+  </script>
+
+	
 	</div>
 </div>
 <% }} }%>

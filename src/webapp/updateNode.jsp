@@ -22,210 +22,303 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 %>
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3 class="panel-title">Update Node <%= node.getName()%></h3>
+    <h3 class="panel-title">Update Node: <%= node.getName()%></h3>
   </div>
   <div class="panel-body">
+	<form method="post" enctype="multipart/form-data" name="updatenodeform">
+		<input type="hidden" name="nodeId" value="<%=node.getId()%>">
 
-				<form method="post" action="UpdateNode" enctype="multipart/form-data">
-					<h3>Update Node</h3>
-					<h4>Name</h4>
-					<input type="text" name="name" <% if(node.getName()!= null) out.print("value=\""+node.getName()+"\"");%>>
-					<h4>Type</h4>
-					<%= type %> - 
-					<select name="type">
-					<%
-						
-						Iterator<NodeType> t = types.iterator();
-						NodeType currentType = null;
-						while(t.hasNext()){
-							currentType = t.next();
-					%>
-							<option value="<%= currentType.getId()%>"<% if(currentType.getId() == node.getType().getId()) out.print(" selected");%>><%= currentType.getSubTypeName()%></option>
-					<%	}%>
-					</select>
-					<h4>Photograph URL</h4>
-					<% if(node.getPhotograph()!= null) 
-						out.print("<img src=\""+node.getPhotograph()+"\">");%>
-					<br />
-					<input type="file" name="photo">
-					<%
-						if(type.equals("Organisation")){	
-						OrganisationNode orgNode = (OrganisationNode)node;
-					%>
-					<h4>Number of Staff</h4>
-					<input type="text" name="numStaff" value="<%= orgNode.getNumStaff()%>">
-					<h4>Number of Customers / Students</h4>
-					<input type="text" name="numCustomers" value="<%= orgNode.getNumCustomers()%>">
-					<%
-						} else if(type.equals("Individual")){
-						IndividualNode indNode = (IndividualNode)node;
-					%>
-					<h4>Date of Birth</h4>
-					<input type="text" name="dob" 
-					<% if(indNode.getDateOfBirth()!=null) out.print("value=\""+fmt.format(indNode.getDateOfBirth())+"\"");
-					%>><input type=button value="select" onclick="displayDatePicker('dob', false, 'dmy');"><br />
-					<h4>Gender</h4>
-					<select name="gender">
-						<%
-							char gender = indNode.getGender();
-							String genderText = null;
-							if(gender == 'u'){
-								genderText = "Unknown";
-							} else if(gender == 'm'){
-								genderText = "Male";
-							} else if(gender == 'f'){
-								genderText = "Female";
-							}
+		<div class="form-group">
+		    <label for="name">Name</label>				
+		  	<input type="text" name="name" id="name" class="form-control" 
+		  	<% if(node.getName()!= null) out.print("value=\""+node.getName()+"\"");%>>
+		</div>
+		
+		<div class="form-group">
+		    <label for="type">Node Type</label>				
+			  <select name="type" class="selectpicker" data-live-search="true" data-width="fit" id="type">
+			    <%
+				Iterator<NodeType> t = types.iterator();
+				NodeType currentType = null;
+				while(t.hasNext()){
+					currentType = t.next();
+		    %>
+					<option value="<%= currentType.getId()%>"
+					<% if(currentType.getId() == node.getType().getId()) out.print(" selected");%>>
+					<%= currentType.getSubTypeName()%>
+					</option>
+			    <%	}%>
+			  </select>
+		</div>
+		
+		</select>
+		
+		<div class="form-group">
+		    <label for="photo">Photograph URL</label>	
+		    
+			<% if(node.getPhotograph()!= null) 
+				out.print("<img src=\""+node.getPhotograph()+"\">");
+			%>
+			<input type="file" class="form-control-file" id="photo" name="photo">
+		</div>
 
-						%>
-						<option value="<%= gender %>"><%= genderText%></option>
-						<option value="m">Male</option>
-						<option value="f">Female</option>
-						<option value="u">Uknown</option>
-					</select>
-					<%
-						} else if(type.equals("Event")){
-						EventNode eveNode = (EventNode)node;
-					%>
-					<h4>Event Date</h4>
-					<input type="text" name="eventDate" 
-					<% if(eveNode.getEventDate()!=null) out.print("value=\""+fmt.format(eveNode.getEventDate())+"\"");
-					%>><input type=button value="select" onclick="displayDatePicker('eventDate', false, 'dmy');"><br />
-					<h4>Number of Presenters</h4>
-					<input type="text" name="numPresenters" value="<%= eveNode.getNumPresenters()%>">
-					<h4>Number of Attendees</h4>
-					<input type="text" name="numAttendees" value="<%= eveNode.getNumAttendees()%>">
-					<%
-						} else if(type.equals("Publication")){
-						PublicationNode pubNode = (PublicationNode)node;
-					%>
-					<h4>Publication Date</h4>
-					<input type="text" name="pubDate" 
-					<% if(pubNode.getPublicationDate()!=null) out.print("value=\""+fmt.format(pubNode.getPublicationDate())+"\"");
-					%>><input type=button value="select" onclick="displayDatePicker('pubDate', false, 'dmy');"><br />
-					<h4>Publisher / Journal</h4>
-					<input type="text" name="source" <% if(pubNode.getSource()!= null) out.print("value=\""+pubNode.getSource()+"\"");%>>
-					<%
-						}	
-					%>
-					<h4>Background Information</h4>
-						<textarea name="background" rows="15" cols="60"><% if(node.getBackground() != null){ out.print(node.getBackground());}else{%><a href="xxx" target="_blank">source</a><%}%></textarea>
-					<h4>URL</h4>
-					<input type="text" name="url" <% if(node.getURL()!= null) out.print("value=\""+node.getURL()+"\"");%>>
-			<% 
-				ContactDetails contact = null;
-				if(type.equals("Organisation")){
-					OrganisationNode orgNode = (OrganisationNode)node;
-					contact = orgNode.getContact();
-				} else if(type.equals("Individual")){
-					IndividualNode indNode = (IndividualNode)node;
-					contact = indNode.getContact();
-				} else if(type.equals("Event")){
-					EventNode eveNode = (EventNode)node;
-					contact = eveNode.getContact();
+	<%
+		if(type.equals("Organisation")){	
+		OrganisationNode orgNode = (OrganisationNode)node;
+	%>
+	    <div class="form-group">
+		      <label for="numStaff">Number of Staff</label>	
+		  <input class="form-control" type="number" name="numStaff" id ="numStaff" 
+		  value="<%= orgNode.getNumStaff()%>">
+		</div>
+		
+		<div>
+		  <label for="numCustomers">Number of Customers / Students</label>	
+			  <input class="form-control" type="number" name="numCustomers" id="numCustomers" 
+			  value="<%= orgNode.getNumCustomers()%>">
+		    </div>
+	<%
+		} else if(type.equals("Individual")){
+		IndividualNode indNode = (IndividualNode)node;
+	%>
+
+	  <div class="form-group">
+		    <label for="dob">Date of Birth</label>	
+		<input class="form-control" type="date" id="dob" name="dob"
+	          <% if(indNode.getDateOfBirth()!=null) out.print("value=\""+fmt.format(indNode.getDateOfBirth())+"\"");%>>
+      </div>
+		
+
+	  <div class="form-group">
+		    <label for="gender">Gender</label>
+		<select class="selectpicker" data-live-search="true" data-width="fit" id="gender" name="gender">
+			<%
+				char gender = indNode.getGender();
+				String genderText = null;
+				if(gender == 'u'){
+					genderText = "Unknown";
+				} else if(gender == 'm'){
+					genderText = "Male";
+				} else if(gender == 'f'){
+					genderText = "Female";
 				}
 
-if(!type.equals("Publication")){
+			%>
+			<option value="<%= gender %>"><%= genderText%></option>
+			<option value="m">Male</option>
+			<option value="f">Female</option>
+			<option value="u">Uknown</option>
+		</select>
+	  </div>
+	<%
+		} else if(type.equals("Event")){
+		EventNode eveNode = (EventNode)node;
+	%>
+	  <div class="form-group">
+		    <label for="eventDate">Event Date</label>	
+		<input class="form-control" type="date" id="eventDate" name="eventDate"
+			<% if(eveNode.getEventDate()!=null) out.print("value=\""+fmt.format(eveNode.getEventDate())+"\"");%>>
+      </div>
 
-				%>
-				<h4>Contact Details</h4>
-				<h5>Address Line 1</h5>
-				<input type="text" name="addressLine1"
-			<%
-					if(contact!=null && contact.getAddressLine1() != null)
-						out.print(" value=\""+contact.getAddressLine1()+"\"");
+	  <div class="form-group">
+		      <label for="numPresenters">Number of Presenters</label>	
+		  <input class="form-control" type="number" name="numPresenters" id ="numPresenters" 
+		  value="<%= eveNode.getNumPresenters()%>">
+		  </div>
+
+	  <div class="form-group">
+		      <label for="numAttendees">Number of Attendees</label>	
+		  <input class="form-control" type="number" name="numAttendees" id ="numAttendees" 
+		  value="<%= eveNode.getNumAttendees()%>">
+		  </div>
+	<%
+		} else if(type.equals("Publication")){
+		PublicationNode pubNode = (PublicationNode)node;
+	%>
+	  <div class="form-group">
+		    <label for="pubDate">Publication Date</label>	
+		<input class="form-control" type="date" id="pubDate" name="pubDate"
+			<% if(pubNode.getPublicationDate()!=null) out.print("value=\""+fmt.format(pubNode.getPublicationDate())+"\"");%>>
+      </div>
+
+	  <div class="form-group">
+		      <label for="source">Publisher / Journal</label>	
+		  <input class="form-control" type="text" name="source" id ="source" 
+		  <% if(pubNode.getSource()!= null) out.print("value=\""+pubNode.getSource()+"\"");%>>
+		  </div>
+	<%
+		}	
+	%>
+
+	  <div class="form-group">
+		      <label for="background">Background Information</label>
+		  <textarea class="form-control" name="background" rows="15" cols="60">"<% if(node.getBackground() != null){ out.print(node.getBackground());}else{out.print("<a href=\"xxx\" target=\"_blank\">source</a>");}%>"</textarea>
+	  </div>
+
+	  <div class="form-group">
+		      <label for="url">URL</label>	
+		  <input class="form-control" type="url" name="url" id ="url" 
+		  <% if(node.getURL()!= null) out.print("value=\""+node.getURL()+"\"");%>>
+		  </div>  
+	<% 
+	ContactDetails contact = null;
+	if(type.equals("Organisation")){
+		OrganisationNode orgNode = (OrganisationNode)node;
+		contact = orgNode.getContact();
+	} else if(type.equals("Individual")){
+		IndividualNode indNode = (IndividualNode)node;
+		contact = indNode.getContact();
+	} else if(type.equals("Event")){
+		EventNode eveNode = (EventNode)node;
+		contact = eveNode.getContact();
+	}
+
+	if(!type.equals("Publication")){
+
+	%>
+
+	  <div class="form-group">
+		      <label for="addressline1">Address Line 1</label>	
+		  <input class="form-control" type="text" name="addressline1" id ="addressline1" 
+		  	<%
+			if(contact!=null && contact.getAddressLine1() != null)
+			out.print(" value=\""+contact.getAddressLine1()+"\"");
 			%>>
-				<h5>Address Line 2</h5>
-				<input type="text" name="addressLine2"
-			<%
-					if(contact!=null && contact.getAddressLine2() != null)
-						out.print(" value=\""+contact.getAddressLine2()+"\"");
+	  </div> 
+
+
+	  <div class="form-group">
+		      <label for="addressline2">Address Line 2</label>	
+		  <input class="form-control" type="text" name="addressline2" id ="addressline2" 
+		  	<%
+			if(contact!=null && contact.getAddressLine2() != null)
+			out.print(" value=\""+contact.getAddressLine2()+"\"");
 			%>>
-				<h5>City</h5>
-				<input type="text" name="city"
-			<%		if(contact!=null && contact.getCity() != null)
-						out.print(" value=\""+contact.getCity()+"\"");
+	  </div> 
+
+	  <div class="form-group">
+		      <label for="city">City</label>	
+		  <input class="form-control" type="text" name="city" id ="city" 
+		  	<%
+			if(contact!=null && contact.getCity() != null)
+			out.print(" value=\""+contact.getCity()+"\"");
 			%>>
-				<h5>State</h5>
-				<input type="text" name="state"
-			<%		if(contact!=null && contact.getState() != null)
-						out.print(" value=\""+contact.getState()+"\"");
+	  </div> 
+
+
+	  <div class="form-group">
+		      <label for="state">State</label>	
+		  <input class="form-control" type="text" name="state" id ="state" 
+		  	<%
+			if(contact!=null && contact.getState() != null)
+			out.print(" value=\""+contact.getState()+"\"");
 			%>>
-				<h5>Country</h5>
-				<input type="text" name="country"
-			<%
-					if(contact!=null && contact.getCountry() != null)
-						out.print(" value=\""+contact.getCountry()+"\"");
+		  </div> 
+
+	  <div class="form-group">
+		      <label for="country">Country</label>	
+		  <input class="form-control" type="text" name="country" id ="country" 
+		  	<%
+			if(contact!=null && contact.getCountry() != null)
+			out.print(" value=\""+contact.getCountry()+"\"");
 			%>>
-				<h5>Latitude</h5>
-				<input type="text" name="latitude"
-			<%
-					if(contact!=null && contact.getLatitude() != 0)
-						out.print(" value=\""+contact.getLatitude()+"\"");
+	  </div> 
+
+	  <div class="form-group">
+		      <label for="latitude">Latitude</label>	
+		  <input class="form-control" type="text" name="latitude" id ="latitude" 
+		  	<%
+			if(contact!=null)
+			out.print(" value=\""+contact.getLatitude()+"\"");
 			%>>
-				<h5>Longitude</h5>
-				<input type="text" name="longitude"
-			<%
-					if(contact!=null && contact.getLongitude() != 0)
-						out.print(" value=\""+contact.getLongitude()+"\"");
+	  </div> 
+
+	  <div class="form-group">
+		      <label for="longitude">Longitude</label>	
+		  <input class="form-control" type="text" name="longitude" id ="longitude" 
+		  	<%
+			if(contact!=null)
+			out.print(" value=\""+contact.getLongitude()+"\"");
 			%>>
-				<h5>Postcode</h5>
-				<input type="text" name="postcode"
-			<%
-					if(contact!=null && contact.getPostcode() != null)
-						out.print(" value=\"" + contact.getPostcode()+"\"");
+	  </div> 
+
+	  <div class="form-group">
+		      <label for="postcode">Postcode</label>	
+		  <input class="form-control" type="text" name="postcode" id ="postcode" 
+		  	<%
+			if(contact!=null && contact.getPostcode() != null)
+			out.print(" value=\""+contact.getPostcode()+"\"");
 			%>>
-				<h5>Phone</h5>
-				<input type="text" name="phone"
-			<%
-					if(contact!=null && contact.getPhone() != null)
-						out.print(" value=\"" + contact.getPhone()+"\"");
+	  </div> 
+
+	  <div class="form-group">
+		      <label for="phone">Phone</label>	
+		  <input class="form-control" type="tel" name="phone" id ="phone" 
+		  	<%
+			if(contact!=null && contact.getPhone() != null)
+			out.print(" value=\""+contact.getPhone()+"\"");
 			%>>
-				<h5>Email</h5>
-				<input type="text" name="email"
-			<%
-					if(contact!=null && contact.getEmail() != null)
-						out.print(" value=\"" + contact.getEmail()+"\"");
+	  </div> 
+
+	  <div class="form-group">
+		      <label for="email">Email</label>	
+		  <input class="form-control" type="email" name="email" id ="email" 
+		  	<%
+			if(contact!=null && contact.getEmail() != null)
+			out.print(" value=\""+contact.getEmail()+"\"");
 			%>>
-				<h5>City of Origin</h5>
-				<input type="text" name="originCity"
-			<%
-					if(contact!=null && contact.getOriginCity() != null)
-						out.print(" value=\"" + contact.getOriginCity()+"\"");
+		  </div> 
+
+
+	  <div class="form-group">
+		      <label for="originCity">City of Origin</label>	
+		  <input class="form-control" type="text" name="originCity" id ="originCity" 
+		  	<%
+			if(contact!=null && contact.getOriginCity() != null)
+			out.print(" value=\""+contact.getOriginCity()+"\"");
 			%>>
-				<h5>State of Origin</h5>
-				<input type="text" name="originState"
-			<%
-					if(contact!=null && contact.getOriginState() != null)
-						out.print(" value=\"" + contact.getOriginState()+"\"");
+	  </div> 
+
+
+	  <div class="form-group">
+		      <label for="originState">State of Origin</label>	
+		  <input class="form-control" type="text" name="originState" id ="originState" 
+		  	<%
+			if(contact!=null && contact.getOriginState() != null)
+			out.print(" value=\""+contact.getOriginState()+"\"");
 			%>>
-				<h5>Country of Origin</h5>
-				<input type="text" name="originCountry"
-			<%
-					if(contact!=null && contact.getOriginCountry() != null)
-						out.print(" value=\"" + contact.getOriginCountry()+"\"");
+	  </div> 
+
+	  <div class="form-group">
+		      <label for="originCountry">Country of Origin</label>	
+		  <input class="form-control" type="text" name="originCountry" id ="originCountry" 
+		  	<%
+			if(contact!=null && contact.getOriginCountry() != null)
+			out.print(" value=\""+contact.getOriginCountry()+"\"");
 			%>>
-<%
-}				
-%>					
-					<input type="hidden" name="update" value="node">
-					<p></p>
-					<center>
-					<table>
-						<tr>
-						<td>
-							<input type="submit" name="submit" value="Apply">
-							</form>
-						</td>
-						<td>
-							<form method="post" action="NodeDetails">
-								<input type="hidden" name="nodeId" value="<%=node.getId()%>">
-								<input type="submit" name="submit" value="Cancel">
-							</form>
-						</td>
-						</tr>
-					</table>
-					</center>
+	  </div> 
+	<%
+	}				
+	%>					
+		  <input type="hidden" name="update" value="node">
+		  
+		  <div class="form-group">
+		  	<button type="submit" class="btn btn-primary" value="Update" onclick="updateNode();">Update</button>
+		  	<button type="submit" class="btn btn-primary" value="Cancel" onclick="cancelUpdateNode();">Cancel</button>
+		  	
+	  	  </div>
+	</form>
+
+  <script>
+    function updateNode(){
+      document.updatenodeform.action = "UpdateNode";
+    }
+    function cancelUpdateNode(){
+      document.updatenodeform.action = "NodeDetails";
+    }
+  </script>
+
+
 	</div>
 </div>
 <% } %>

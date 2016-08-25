@@ -189,6 +189,7 @@ if (user.getGraph().getSelected() == null){
 				if(contact != null){
 			%>
 				<h4>Contact Details</h4>
+				<div class="well">
 			<%
 					if(contact.getAddressLine1() != null)
 						out.print(contact.getAddressLine1()+"<br />");
@@ -214,6 +215,9 @@ if (user.getGraph().getSelected() == null){
 						out.print("state of origin: " + contact.getOriginState()+"<br />");
 					if(contact.getOriginCountry() != null)
 						out.print("country of origin: " + contact.getOriginCountry()+"<br />");
+			%>
+				</div>
+			<%
 				}
 			%>
 			<h4>Affiliations</h4>

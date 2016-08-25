@@ -21,7 +21,7 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 	node = user.getGraph().getSelected();
 	if(edge==null){
 %>
-	<p><font color="white">please select and edge first (via a participating node)</font></p>
+	<p><font color="white">please select an edge first (via a participating node)</font></p>
 <%
 	}else{
 		Node node1 = edge.getNodes().get(0);
@@ -59,7 +59,7 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 				</table>
 				</p>
 			<%}%>
-			<h3>Relationship Details</h3>
+
 			<h4>Relationship Type:</h4> <%= edge.getType().getTypeName() %> - <%= edge.getType().getSubTypeName() %><br />
 			<% if(edge.getStartDate() != null){ %>
 			<h4>Start Date:</h4> <%= fmt.format(edge.getStartDate()) %><br />
@@ -79,19 +79,12 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 			Last modified by: <%= edge.getModBy().getName() %><br />
 			<%}%>
 			Last modfied date: <%= edge.getLastModified() %><br />
-			<p></p>
-			<center>
-			<table>
-				<tr>
-					<td>
-						<form method="post" action="NodeDetails">
-						<input type="submit" name="submit" value="Back" />
-						<input type="hidden" name="nodeId" value="<%= node.getId()%>" />
-						</form>
-					</td>
-				</tr>
-			</table>
-			</center>
+
+			<form method="post" action="NodeDetails">
+			<input class="btn btn-primary" type="submit" name="submit" value="Back" />
+			<input type="hidden" name="nodeId" value="<%= node.getId()%>" />
+			</form>
+
 	</div>
 </div>
 <%}}%>

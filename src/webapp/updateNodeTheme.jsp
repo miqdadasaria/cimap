@@ -25,37 +25,47 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
   </div>
   <div class="panel-body">
 
-				<form method="post" action="AddOrUpdate">
-				<%
-					Iterator<Theme> i = themes.iterator();
-					Theme current;
-					while(i.hasNext()){
-						current = i.next();
-				%>
-					<input type="checkbox" name="theme" value="<%= current.getId()%>" 
-					<% if(nodeTheme.contains(current)){%>
-					checked
-					<%}%>
-					> <%= current.getName() %><br />
-				<%	}%>
-					<input type="hidden" name="update" value="theme">
-					<p></p>
-					<center>
-					<table>
-						<tr>
-						<td>
-							<input type="submit" name="submit" value="Apply">
-							</form>
-						</td>
-						<td>
-							<form method="post" action="NodeDetails">
-								<input type="hidden" name="nodeId" value="<%=node.getId()%>">
-								<input type="submit" name="submit" value="Cancel">
-							</form>
-						</td>
-						</tr>
-					</table>
-					</center>
+	<form method="post" name="updatenodethemeform">
+
+		<div class="form-group">
+		    <label for="theme">Themes</label>
+		    <select name="theme" class="selectpicker" data-live-search="true" data-width="fit" id="theme" multiple>   		
+		    <%
+			Iterator<Theme> i = themes.iterator();
+			Theme current;
+			while(i.hasNext()){
+			current = i.next();
+			%>			
+			<option value="<%= current.getId()%>"
+				<% if(nodeTheme.contains(current)){%> selected<%}%>>
+				<%= current.getName() %></option>
+			<%  }%>
+			</select>
+		</div>
+	<%
+
+	%>
+
+		<input type="hidden" name="update" value="theme">
+
+		<input type="hidden" name="nodeId" value="<%=node.getId()%>">
+
+		  <div class="form-group">
+		  	<button type="submit" class="btn btn-primary" value="Update" onclick="updateNodeTheme();">Update Node Themes</button>
+		  	<button type="submit" class="btn btn-primary" value="Cancel" onclick="cancelUpdateNodeTheme();">Cancel</button>
+		  	
+	  	  </div>
+	</form>
+
+  <script>
+    function updateNodeTheme(){
+      document.updatenodethemeform.action = "AddOrUpdate";
+    }
+    function cancelUpdateNodeTheme(){
+      document.updatenodethemeform.action = "NodeDetails";
+    }
+  </script>
+
 	</div>
 </div>
 <% } %>
