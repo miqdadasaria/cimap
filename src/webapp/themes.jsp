@@ -39,7 +39,7 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 				while(a.hasNext()){
 					theme = a.next();
 			%>			
-				<a href="Themes?update=themeDetails&themeid=<%= theme.getId() %>" class="list-group-item"><%= theme.getName() %></a><br />
+				<a href="Themes?update=themeDetails&themeId=<%= theme.getId() %>" class="list-group-item"><%= theme.getName() %></a><br />
 			<%  }%>
 			</div>
 

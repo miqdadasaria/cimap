@@ -38,7 +38,7 @@ if (user.getGraph().getSelected() == null){
 } else {
 	currentNode = user.getGraph().getSelected();
 	boolean isAdmin = (user.getType() >= User.ADMIN);
-	DateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
+	DateFormat fmt = new SimpleDateFormat("yyyy-mm-dd");
 	String type = currentNode.getType().getTypeName();
 %>
    <div class="panel panel-default">

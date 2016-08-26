@@ -21,35 +21,45 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
   </div>
   <div class="panel-body">
 
-				<form method="post" action="AddOrUpdate">
-					<h3>Add News Coverage</h3>
-					<h4>Headline</h4>
-					<input type="text" name="title"><br />
-					<h4>Source</h4>
-					<input type="text" name="source"><br />
-					<h4>Date</h4>
-					<input type="text" name="date"><input type=button value="select" onclick="displayDatePicker('date', false, 'dmy');"><br />
-					<h4>URL</h4>
-					<input type="text" name="url"><br />
-					<input type="hidden" name="update" value="news">
-					<p></p>
-					<center>
-					<table>
-						<tr>
-						<td>
-							<input type="submit" name="submit" value="Apply">
-							</form>
-						</td>
-						<td>
-							<form method="post" action="NodeDetails">
-								<input type="hidden" name="nodeId" value="<%=node.getId()%>">
-								<input type="submit" name="submit" value="Cancel">
-							</form>
-						</td>
-						</tr>
-					</table>
-					</center>
-				
+	<form method="post" name="newsform">
+		<div class="form-group">
+		    <label for="name">Headline</label>				
+		  	<input type="text" name="title" id="title" class="form-control">
+		</div>		
+
+		<div class="form-group">
+		    <label for="name">Source</label>				
+		  	<input type="text" name="source" id="source" class="form-control">
+		</div>	
+
+		<div class="form-group">
+		    <label for="name">Date</label>				
+		  	<input type="date" name="date" id="date" class="form-control">
+		</div>
+
+		<div class="form-group">
+		    <label for="name">URL</label>				
+		  	<input type="url" name="url" id="url" class="form-control">
+		</div>
+
+		<input type="hidden" name="update" value="news">
+		<input type="hidden" name="nodeId" value="<%=node.getId()%>">
+
+	  <div class="form-group">
+	  	<button type="submit" class="btn btn-primary" value="Add News" onclick="addNews();">Add News</button>
+	  	<button type="submit" class="btn btn-primary" value="Cancel" onclick="cancelAddNews();">Cancel</button>	
+  	  </div>
+	</form>
+
+  <script>
+    function addNews(){
+      document.newsform.action = "AddOrUpdate";
+    }
+    function cancelAddNews(){
+      document.newsform.action = "NodeDetails";
+    }
+  </script>
+
 </div>
 </div>
 <% } %>

@@ -24,63 +24,95 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
   </div>
   <div class="panel-body">
 
-				<form method="post" action="AddOrUpdateUser">
-					<h3>Update User</h3>
-					<h4>Name</h4>
-					<input type="text" name="name" value="<%=u.getName()%>"><br />
-					<h4>Photograph URL</h4>
-					<input type="text" name="name" <%if(u.getPhotograph()!=null){%>value="<%=u.getPhotograph()%>"<%}%>><br />
-					<h4>Country</h4>
-					<input type="text" name="country" <%if(u.getCountry()!=null){%>value="<%=u.getCountry()%>"<%}%>><br />
-					<h4>Email</h4>
-					<input type="text" name="email" <%if(u.getEmail()!=null){%>value="<%=u.getEmail()%>"<%}%>><br />
-					<h4>URL</h4>
-					<input type="text" name="url" <%if(u.getUrl()!=null){%>value="<%=u.getUrl()%>"<%}%>><br />
-					<h4>Orgname</h4>
-					<input type="text" name="orgname" <%if(u.getOrgName()!=null){%>value="<%=u.getOrgName()%>"<%}%>><br />
-					<h4>Biography</h4>
-					<textarea name="bio"><%if(u.getBio()!=null){%><%=u.getBio()%><%}%></textarea><br />
-					<h4>Username</h4>
-					<input type="text" name="username" value="<%=u.getUsername()%>"><br />
-					<h4>Password</h4>
-					<input type="text" name="password" value="<%=u.getPassword()%>"><br />
-					<h4>Type</h4>
-					<select name="type">
-					<%
-						String typeText = "Super User";
-						if(u.getType()==3){
-							typeText = "Normal";
-						} else if(u.getType()==5){
-							typeText = "Admin";
-						}
-					%>
-						<option value="<%=u.getType()%>"><%= typeText%></option>
-						<option value="3">Normal</option>
-						<option value="5">Admin</option>
-						<option value="6">Super User</option>
-					</select><br />
-					<h4>View Quota</h4>
-					<input type="text" name="viewQuota" value="<%=u.getNodeViewQuota()%>"><br />
-					<h4>Update Quota</h4>
-					<input type="text" name="updateQuota" value="<%=u.getNodeUpdateQuota()%>"><br />
-					<input type="hidden" name="userId" value="<%=u.getId()%>">
-					<input type="hidden" name="update" value="updateUser2">
-					<p></p>
-					<center>
-					<table>
-						<tr>
-						<td>
-							<input type="submit" name="submit" value="Apply">
-							</form>
-						</td>
-						<td>
-							<form method="post" action="cimap.jsp?tab=useradmin">
-								<input type="submit" name="submit" value="Cancel">
-							</form>
-						</td>
-						</tr>
-					</table>
-					</center>
+	<form method="post" name="updateuserform">
+		<div class="form-group">
+		    <label for="name">Name</label>				
+		  	<input type="text" name="name" id="name" class="form-control" value="<%=u.getName()%>">
+		</div>
+
+		<div class="form-group">
+		    <label for="country">Country</label>				
+		  	<input type="text" name="country" id="country" class="form-control" <%if(u.getCountry()!=null){%>value="<%=u.getCountry()%>"<%}%>>
+		</div>
+
+
+		<div class="form-group">
+		    <label for="email">Email</label>				
+		  	<input type="email" name="email" id="email" class="form-control" <%if(u.getEmail()!=null){%>value="<%=u.getEmail()%>"<%}%>>
+		</div>
+
+		<div class="form-group">
+		    <label for="url">URL</label>				
+		  	<input type="url" name="url" id="url" class="form-control" <%if(u.getUrl()!=null){%>value="<%=u.getUrl()%>"<%}%>>
+		</div>
+
+		<div class="form-group">
+		    <label for="orgname">Orgname</label>				
+		  	<input type="text" name="orgname" id="orgname" class="form-control" <%if(u.getOrgName()!=null){%>value="<%=u.getOrgName()%>"<%}%>>
+		</div>
+
+		<div class="form-group">
+		    <label for="bio">Biography</label>				
+		  	<textarea name="bio" id="bio" class="form-control" rows="10" cols="60"><%if(u.getBio()!=null){%><%=u.getBio()%><%}%></textarea>
+		</div>
+
+		<div class="form-group">
+		    <label for="username">Username</label>				
+		  	<input type="text" name="username" id="username" class="form-control" value="<%=u.getUsername()%>">
+		</div>
+
+		<div class="form-group">
+		    <label for="password">Password</label>				
+		  	<input type="password" name="password" id="password" class="form-control" value="<%=u.getPassword()%>">
+		</div>
+
+		<div class="form-group">
+		    <label for="type">Type</label>
+		    <select class="selectpicker" data-live-search="true" data-width="fit" id="type" name="type">
+				<%
+					String typeText = "Super User";
+					if(u.getType()==3){
+						typeText = "Normal";
+					} else if(u.getType()==5){
+						typeText = "Admin";
+					}
+				%>
+				<option value="<%=u.getType()%>"><%= typeText%></option>
+				<option value="3">Normal</option>
+				<option value="5">Admin</option>
+				<option value="6">Super User</option>
+			</select>
+		</div>
+
+		<div class="form-group">
+		    <label for="viewQuota">View Quota</label>				
+		  	<input type="text" name="viewQuota" id="viewQuota" class="form-control" value="<%=u.getNodeViewQuota()%>">
+		</div>
+
+		<div class="form-group">
+		    <label for="updateQuota">Update Quota</label>				
+		  	<input type="text" name="updateQuota" id="updateQuota" class="form-control" value="<%=u.getNodeUpdateQuota()%>">
+		</div>
+
+		<input type="hidden" name="userId" value="<%=u.getId()%>">
+		<input type="hidden" name="update" value="updateUser2">
+
+		  <div class="form-group">
+		  	<button type="submit" class="btn btn-primary" value="Update" onclick="updateUser();">Update User</button>
+		  	<button type="submit" class="btn btn-primary" value="Cancel" onclick="cancelUpdateUser();">Cancel</button>
+		  	
+	  	  </div>
+	</form>
+
+  <script>
+    function updateUser(){
+      document.updateuserform.action = "AddOrUpdateUser";
+    }
+    function cancelUpdateUser(){
+      document.updateuserform.action = "cimap.jsp?tab=useradmin";
+    }
+  </script>								
+
 	</div>
 </div>
 <% } }%>

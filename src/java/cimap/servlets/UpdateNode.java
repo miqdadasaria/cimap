@@ -55,7 +55,7 @@ public class UpdateNode extends HttpServlet {
 		if (user != null && user.isLoggedIn() && isMultipart) {
 			Node node = user.getGraph().getSelected();
 
-			DateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
+			DateFormat fmt = new SimpleDateFormat("yyyy-mm-dd");
 			ServletFileUpload upload = new ServletFileUpload();
 
 			// Parse the request

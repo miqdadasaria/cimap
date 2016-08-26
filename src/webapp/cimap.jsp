@@ -22,6 +22,8 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 	} else {
 		tab = "themes";
 	}
+	String update = (String)(session.getAttribute("update"));
+
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -113,13 +115,12 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 
 	          <div role="tabpanel" class="tab-pane <%if(tab.equals("themes")){%>active<%}%>" id="theme">
 	          	<%
-				String update = (String)(session.getAttribute("update"));
 				String themeurl = "themes.jsp";
 				if(update != null && update.equals("updateTheme")){
 					themeurl = "updateTheme.jsp";
 				} else if(update != null && update.equals("addTheme")){
 					themeurl= "addTheme.jsp";
-				} else if(session.getAttribute("themeid") != null){
+				} else if(session.getAttribute("themeId") != null){
 					themeurl = "themeDetails.jsp";
 				}%>
 				<jsp:include page="<%=themeurl%>"/>

@@ -21,47 +21,74 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
   </div>
   <div class="panel-body">
 
+	<form method="post" name="adduserform">
+		<div class="form-group">
+		    <label for="name">Name</label>				
+		  	<input type="text" name="name" id="name" class="form-control">
+		</div>
 
-				<form method="post" action="AddOrUpdateUser">
-					<h3>Add User</h3>
-					<h4>Name</h4>
-					<input type="text" name="name"><br />
-					<h4>Country</h4>
-					<input type="text" name="country"><br />
-					<h4>Email</h4>
-					<input type="text" name="email"><br />
-					<h4>URL</h4>
-					<input type="text" name="url"><br />
-					<h4>Orgname</h4>
-					<input type="text" name="orgname"><br />
-					<h4>Biography</h4>
-					<textarea name="bio"></textarea><br />
-					<h4>Username</h4>
-					<input type="text" name="username"><br />
-					<h4>Password</h4>
-					<input type="text" name="password"><br />
-					<h4>Type</h4>
-					<select name="type">
-						<option value="3">Normal</option>
-						<option value="5">Admin</option>
-					</select><br />
-					<input type="hidden" name="update" value="addUser2">
-			<p></p>
-			<center>
-			<table>
-				<tr>
-					<td>
-					<input type="submit" name="submit" value="Apply">
-					</form>
-					</td>
-					<td>
-						<form method="post" action="cimap.jsp?tab=useradmin">
-							<input type="submit" name="submit" value="Cancel">
-						</form>
-					</td>
-				</tr>
-			</table>
-			</center>
+		<div class="form-group">
+		    <label for="country">Country</label>				
+		  	<input type="text" name="country" id="country" class="form-control">
+		</div>
+
+
+		<div class="form-group">
+		    <label for="email">Email</label>				
+		  	<input type="email" name="email" id="email" class="form-control">
+		</div>
+
+		<div class="form-group">
+		    <label for="url">URL</label>				
+		  	<input type="url" name="url" id="url" class="form-control">
+		</div>
+
+		<div class="form-group">
+		    <label for="orgname">Orgname</label>				
+		  	<input type="text" name="orgname" id="orgname" class="form-control">
+		</div>
+
+		<div class="form-group">
+		    <label for="bio">Biography</label>				
+		  	<textarea name="bio" id="bio" class="form-control" rows="10" cols="60"></textarea>
+		</div>
+
+		<div class="form-group">
+		    <label for="username">Username</label>				
+		  	<input type="text" name="username" id="username" class="form-control">
+		</div>
+
+		<div class="form-group">
+		    <label for="password">Password</label>				
+		  	<input type="password" name="password" id="password" class="form-control">
+		</div>
+
+		<div class="form-group">
+		    <label for="type">Type</label>
+		    <select class="selectpicker" data-live-search="true" data-width="fit" id="type" name="type">
+				<option value="3">Normal</option>
+				<option value="5">Admin</option>
+			</select>
+		</div>
+
+		<input type="hidden" name="update" value="addUser2">
+		  <div class="form-group">
+		  	<button type="submit" class="btn btn-primary" value="Update" onclick="addUser();">Add User</button>
+		  	<button type="submit" class="btn btn-primary" value="Cancel" onclick="cancelAddUser();">Cancel</button>
+		  	
+	  	  </div>
+	</form>
+
+  <script>
+    function addUser(){
+      document.adduserform.action = "AddOrUpdateUser";
+    }
+    function cancelAddUser(){
+      document.adduserform.action = "cimap.jsp?tab=useradmin";
+    }
+  </script>
+
+
 	</div>
 </div>
 <% } }%>

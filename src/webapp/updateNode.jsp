@@ -18,7 +18,7 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 	Node node = user.getGraph().getSelected();
 	ArrayList<NodeType> types = MasterGraph.getNodeSubTypeList(node.getType().getTypeName());
 	String type = node.getType().getTypeName();
-	DateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
+	DateFormat fmt = new SimpleDateFormat("yyyy-mm-dd");
 %>
 <div class="panel panel-default">
   <div class="panel-heading">

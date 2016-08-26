@@ -14,7 +14,7 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 	response.sendRedirect(url);
 } else {
 
-String id = (String)(session.getAttribute("themeid"));
+String id = (String)(session.getAttribute("themeId"));
 if(id != null && !id.equals("")){
 int themeId = Integer.parseInt(id);
 Theme theme = MasterGraph.getTheme(themeId);
@@ -38,7 +38,7 @@ User user = (User)(session.getAttribute("username"));
 				<tr>
 					<td>
 						<form method="post" action="Themes">
-						<input type="hidden" name="themeid" value="<%= theme.getId() %>">
+						<input type="hidden" name="themeId" value="<%= theme.getId() %>">
 						<input type="hidden" name="update" value="updateTheme">
 						<button name="submit" value="submit" type="submit"><img src="images/update.png" alt="update theme" border="0"></button>
 						</form>

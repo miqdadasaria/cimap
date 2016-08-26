@@ -26,7 +26,7 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 		Node node2 = edge.getNodes().get(1);
 
 		ArrayList<EdgeType> ets = MasterGraph.getEdgeTypeList();
-		DateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
+		DateFormat fmt = new SimpleDateFormat("yyyy-mm-dd");
 
 %>
 
@@ -69,26 +69,28 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 			<input class="form-control" type="date" id="endDate" name="endDate" <% if(edge.getEndDate() != null){ out.print("value=\"" + fmt.format(edge.getEndDate()) +"\"");}%>>
 	    </div>			
 
-		<input type="hidden" name="update" value="updateEdge">
+		<input type="hidden" name="update" id="update" value="">
 		<input type="hidden" name="edgeId" value="<%= edge.getId() %>">
 
 	  <div class="form-group">
 	  	<button type="submit" class="btn btn-primary" value="Update" onclick="updateEdge();">Update Relationship</button>
-	  	<button type="submit" class="btn btn-primary" value="Cancel" onclick="cancelUpdateEdge();">Cancel</button>
-	  	
+	  	<button type="submit" class="btn btn-primary" value="Cancel" onclick="cancelUpdateEdge();">Cancel</button>	
   	  </div>
 	</form>
 
   <script>
     function updateEdge(){
+      var update = document.getElementById("update");
+      update.value = "updateEdge";
       document.updateedgeform.action = "AddOrUpdateEdge";
     }
     function cancelUpdateEdge(){
+      var update = document.getElementById("update");
+      update.value = "edgeDetails";
       document.updateedgeform.action = "EdgeDetails";
     }
   </script>
 
-	
 	</div>
 </div>
 <% }} }%>

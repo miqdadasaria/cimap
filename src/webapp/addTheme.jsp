@@ -20,31 +20,42 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
   </div>
   <div class="panel-body">
 
-				<form method="post" action="AddOrUpdate">
-					<h3>Add Theme</h3>
-					<h4>Name</h4>
-					<input type="text" name="name"><br />
-					<h4>Description</h4>
-					<textarea name="description" rows="10" cols="60"></textarea><br />
-					<h4>Keywords (comma separated)</h4>
-					<input type="text" name="keywords" size="60"><br />
-					<input type="hidden" name="update" value="addTheme">
-					<p></p>
-					<center>
-					<table>
-						<tr>
-						<td>
-							<input type="submit" name="submit" value="Add">
-							</form>
-						</td>
-						<td>
-							<form method="post" action="Themes">
-							<input type="submit" name="submit" value="Cancel"><br />
-							</form>
-						</td>
-						</tr>
-					</table>
-					</center>
+	<form method="post" name="addthemeform">
+
+		<div class="form-group">
+		    <label for="name">Name</label>				
+			<input type="text" name="name" id="name" class="form-control">
+		</div>
+
+		<div class="form-group">
+		    <label for="description">Description</label>				
+			<textarea name="description" id="description" class="form-control" rows="10" cols="60"></textarea>
+		</div>
+
+		<div class="form-group">
+		    <label for="keywords">Keywords (comma separated)</label>				
+			<input type="text" name="keywords" id="keywords" class="form-control">
+		</div>
+
+		<input type="hidden" name="update" id="update" value="addTheme">
+
+		  <div class="form-group">
+		  	<button type="submit" class="btn btn-primary" value="Add Theme" onclick="addTheme();">Add Themes</button>
+		  	<button type="submit" class="btn btn-primary" value="Cancel" onclick="cancelAddTheme();">Cancel</button>
+	  	  </div>
+	</form>
+
+	  <script>
+	    function addTheme(){
+	      document.addthemeform.action = "AddOrUpdate";
+	    }
+	    function canceladdTheme(){
+	      var update = document.getElementById("update");
+	      update.value = "";
+	      document.addthemeform.action = "Themes";
+	    }
+	  </script>
+	
 	</div>
 </div>
 

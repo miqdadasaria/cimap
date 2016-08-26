@@ -53,7 +53,6 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 		  <div class="form-group">
 		  	<button type="submit" class="btn btn-primary" value="Update" onclick="updateNodeTheme();">Update Node Themes</button>
 		  	<button type="submit" class="btn btn-primary" value="Cancel" onclick="cancelUpdateNodeTheme();">Cancel</button>
-		  	
 	  	  </div>
 	</form>
 

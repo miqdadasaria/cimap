@@ -31,7 +31,7 @@ public class AddOrUpdateEdge extends HttpServlet {
 			String update = request.getParameter("update");
 				Edge edge = user.getGraph().getSelectedEdge();
 				
-				DateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");
+				DateFormat fmt = new SimpleDateFormat("yyyy-mm-dd");
 				if(update.equals("updateEdge")){
 					int type = Integer.parseInt(request.getParameter("edgeType"));
 					EdgeType edgeType = MasterGraph.getEdgeType(type);

@@ -109,10 +109,11 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 	<%
 				}	
 	%>
+			</div>
 	<%
 	}
 	%>
-			</div>	
+				
 	<hr width="80%" />
 	<form method="post" action="Search">
 		<button type="submit" class="btn btn-primary" value="Back to Search Page">Back to Search Page</button>

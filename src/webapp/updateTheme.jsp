@@ -14,7 +14,7 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
 	response.sendRedirect(url);
 } else {
 	User user = (User)(session.getAttribute("username"));
-	String id = (String)(session.getAttribute("themeid"));
+	String id = (String)(session.getAttribute("themeId"));
 	if(id != null && !id.equals("") && user.getType() >= User.ADMIN){
 		int themeId = Integer.parseInt(id);
 		Theme theme = MasterGraph.getTheme(themeId);
@@ -25,42 +25,52 @@ if(session.getAttribute("username") == null || !(((User)(session.getAttribute("u
   </div>
   <div class="panel-body">
 
-				<form method="post" action="AddOrUpdate">
-					<h3>Update Theme</h3>
-					<h4>Name</h4>
-					<input type="text" name="name" value="<%= theme.getName()%>"><br />
-					<h4>Description</h4>
-					<textarea name="description" rows="10" cols="60"><% if(theme.getDetails()!=null){%><%= theme.getDetails()%><%}%></textarea><br />
-					<h4>Keywords (comma separated)</h4>
-<%
-		ArrayList<String> words = theme.getKeywords();
-		Iterator<String> w = words.iterator();
-		String keywords ="";
-		while(w.hasNext())
-			keywords=keywords+w.next() + ",";
-		if(keywords.length()>0)
-			keywords=keywords.substring(0, keywords.length()-1);
-%>
-					<input type="text" name="keywords" size="60" value="<%= keywords%>"><br />
-					<input type="hidden" name="update" value="updateTheme">
-					<input type="hidden" name="themeId" value="<%=theme.getId()%>">
-					<p></p>
-					<center>
-					<table>
-						<tr>
-						<td>
-							<input type="submit" name="submit" value="Apply">
-							</form>
-						</td>
-						<td>
-							<form method="post" action="Themes">
-							<input type="hidden" name="themeid" value="<%=theme.getId()%>">
-							<input type="submit" name="submit" value="Cancel"><br />
-							</form>
-						</td>
-						</tr>
-					</table>
-					</center>
+		<form method="post" name="updatethemeform">
+			<div class="form-group">
+			    <label for="name">Name</label>				
+				<input type="text" name="name" id="name" class="form-control" value="<%= theme.getName()%>">
+			</div>
+
+			<div class="form-group">
+			    <label for="description">Description</label>				
+				<textarea name="description" id="description" class="form-control" rows="10" cols="60"><% if(theme.getDetails()!=null){%><%= theme.getDetails()%><%}%></textarea>
+			</div>
+
+
+			<%
+			ArrayList<String> words = theme.getKeywords();
+			Iterator<String> w = words.iterator();
+			String keywords ="";
+			while(w.hasNext())
+				keywords=keywords+w.next() + ",";
+			if(keywords.length()>0)
+				keywords=keywords.substring(0, keywords.length()-1);
+			%>
+			<div class="form-group">
+			    <label for="keywords">Keywords (comma separated)</label>				
+				<input type="text" name="keywords" id="keywords" class="form-control" value="<%= keywords%>">
+			</div>
+
+			<input type="hidden" name="update" id="update" value="updateTheme">
+			<input type="hidden" name="themeId" value="<%=theme.getId()%>">
+
+		  <div class="form-group">
+		  	<button type="submit" class="btn btn-primary" value="Update" onclick="updateTheme();">Update Themes</button>
+		  	<button type="submit" class="btn btn-primary" value="Cancel" onclick="cancelUpdateTheme();">Cancel</button>
+	  	  </div>
+	</form>
+
+	  <script>
+	    function updateTheme(){
+	      document.updatethemeform.action = "AddOrUpdate";
+	    }
+	    function cancelUpdateTheme(){
+	      var update = document.getElementById("update");
+	      update.value = "";
+	      document.updatethemeform.action = "Themes";
+	    }
+	  </script>
+
 	</div>
 </div>
 
